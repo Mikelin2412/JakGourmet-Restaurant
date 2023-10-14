@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;700&family=Inika:wght@700&family=Inter:wght@300;400;700&family=Open+Sans:wght@400;700&family=Roboto&family=Tinos&display=swap');
+
+button {
+    cursor: pointer;
+}
+
+.menu-page {
+    min-height: calc(100vh - 77px);
+}
+
+.types-of-dishes-navigation {
+    padding: 30px 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 605px;
+}
+
+.types-of-dishes-navigation__items {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.types-of-dishes-navigation__items > li {
+    list-style-type: none;
+    color: #626262;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.list-of-dishes {
+    border-top: 1px solid rgba(117, 117, 117, 0.2);
+    padding: 0 84px 40px;
+}
+
+.list-of-dishes__title {
+    margin: 30px 0;
+    color: #1D1D1D;
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 34px;
+}
+
+.list-of-dishes__cards-block {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(470px, 1fr));
+    gap: 20px;
+}

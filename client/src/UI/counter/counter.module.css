@@ -1,0 +1,13 @@
+.counter {
+    display: flex;
+    flex-direction: column;
+}
+
+.increaseButton, .decreaseButton {
+    color: rgba(0, 0, 0, 0.25);
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+}

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;700&family=Inika:wght@700&family=Inter:wght@300;400;700&family=Open+Sans:wght@400;700&family=Tinos&display=swap');
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 77px;
+    background-color: rgba(38, 38, 38, 1);
+}
+
+.footer > p {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

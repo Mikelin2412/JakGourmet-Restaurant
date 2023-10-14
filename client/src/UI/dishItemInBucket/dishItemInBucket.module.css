@@ -1,0 +1,46 @@
+.dishItem {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dishItemBlock {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.dishInfo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dishName {
+    margin: 0;
+    padding: 0;
+    color: #1D1D1D;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 34px;
+}
+
+.dishCost {
+    margin: 0;
+    padding: 0;
+    color: #1D1D1D;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+}

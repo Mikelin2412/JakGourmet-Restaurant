@@ -1,0 +1,36 @@
+.main-section-card {
+    width: 349px;
+    height: 328px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 10px 10px 40px 20px rgba(0, 0, 0, 0.10);
+}
+
+.main-section-card > img {
+    margin-top: 35px;
+}
+
+.main-section-card > h4 {
+    margin: 0;
+    padding: 0;
+    color: #2C2C2C;
+    font-family: Tinos;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.main-section-card > p {
+    margin: 20px 0 0 0;
+    padding: 0;
+    color: #656363;
+    text-align: center;
+    font-family: Tinos;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

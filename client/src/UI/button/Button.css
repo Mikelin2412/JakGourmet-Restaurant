@@ -1,0 +1,19 @@
+.button {
+    width: 157px;
+    height: 47px;
+    background: #FF7400;
+    border: none;
+    cursor: pointer;
+
+    color: #FFF;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    transition: all .3s;
+}
+
+.button:hover {
+    background: #ff933a;
+}
