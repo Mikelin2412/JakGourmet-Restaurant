@@ -1,21 +1,33 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { DishContext } from '../../pages/Bucket'
 import BucketButton from '../bucketButton/BucketButton'
 import Counter from '../counter/Counter'
 import classes from './dishItemInBucket.module.css'
 
 const DishItemInBucket = () => {
+  const {listOfDishes, handleChangeCountOfDishes} = useContext(DishContext);
+
   return (
-    <div className={classes.dishItem}>
-        <div className={classes.dishItemBlock}>
-            <div className={classes.dishInfo}>
-                <h4 className={classes.dishName}>Сало домашнее с горчицей</h4>
-                <p className={classes.dishCost}>32 руб.</p>
+    <>
+      {listOfDishes.map((elem, index) => {
+        return (
+          <div key={index} className={classes.dishItem}>
+            <div className={classes.dishItemBlock}>
+              <div className={classes.dishInfo}>
+                <h4 className={classes.dishName}>{elem.dishName}</h4>
+                <p className={classes.dishCost}>{elem.dishCost * elem.numberOfServings} руб.</p>
+              </div>
+              <BucketButton
+                innerText={'Удалить'} />
             </div>
-            <BucketButton
-                innerText={'Удалить'}/>
-        </div>
-        <Counter/>
-    </div>
+            <Counter
+              countOfDishes={elem.numberOfServings}
+              handleClick={handleChangeCountOfDishes}
+              id={index}/>
+          </div>
+        )
+      })}
+    </>
   )
 }
 

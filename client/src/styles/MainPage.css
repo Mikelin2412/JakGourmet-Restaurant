@@ -98,11 +98,20 @@ body {
 
 .navigation-menu__items > li{
     list-style: none;
+}
+
+.nav-links {
+    text-decoration: none;
     font-family: 'Open Sans';
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    color: #FFF;
+}
+
+.active {
+    text-decoration: underline;
 }
 
 .main-section__cards {

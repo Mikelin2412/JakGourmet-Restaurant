@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../UI/button/Button';
 import logo from '../assets/images/LOGO.svg';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -15,16 +15,16 @@ const Header = () => {
         <nav className='navigation-menu'>
             <ul className='navigation-menu__items'>
                 <li>
-                    <Link to="/">ГЛАВНАЯ</Link>
+                    <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ГЛАВНАЯ</NavLink>
                 </li>
                 <li>
-                    <Link to="/menu">МЕНЮ</Link>
+                    <NavLink to="/menu" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>МЕНЮ</NavLink>
                 </li>
                 <li>
-                    <Link to="/bucket">КОРЗИНА</Link>
+                    <NavLink to="/bucket" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>КОРЗИНА</NavLink>
                 </li>
                 <li>
-                    <Link to="/reservation">БРОНЬ</Link>
+                    <NavLink to="/reservation" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>БРОНЬ</NavLink>
                 </li>
             </ul>
             <Button

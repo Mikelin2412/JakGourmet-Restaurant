@@ -1,4 +1,5 @@
 .counter {
+    max-width: 75px;
     display: flex;
     flex-direction: column;
 }
@@ -10,4 +11,43 @@
     font-style: normal;
     font-weight: 500;
     line-height: 21px;
+
+    background-color: #fff;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid #000;
+    transition: all .1s;
+}
+
+.decreaseButton {
+    border-radius: 0 0 20px 20px;
+}
+
+.counterInputBlock {
+    display: flex;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.counterInput {
+    padding: 0;
+    max-width: 100%;
+    border: none;
+    text-align: center;
+
+    color: #1D1D1D;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    outline: none;
+}
+
+.counterInput::-webkit-inner-spin-button,
+.counterInput::-webkit-outer-spin-button {
+    appearance: none;
+}
+
+.increaseButton:hover, .decreaseButton:hover {
+    background-color: #f0f0f0;
 }

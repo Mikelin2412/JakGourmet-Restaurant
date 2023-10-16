@@ -4,7 +4,7 @@ button {
     cursor: pointer;
 }
 
-.menu-page {
+.page {
     min-height: calc(100vh - 77px);
 }
 
