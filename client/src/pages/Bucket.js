@@ -10,7 +10,7 @@ export const DishContext = createContext({});
 const Bucket = () => {
   const [listOfDishes, setListOfDishes] = useState([
     {
-      dishName: 'Cало домашнее с горчицей',
+      dishName: 'Вегамикс',
       description: 'Вкусно и точка',
       dishCost: 32,
       numberOfServings: 1,
@@ -45,8 +45,22 @@ const Bucket = () => {
     });
   }
 
+  const handleDeleteOfTheDish = (id, costOfTheDish) => {
+    setListOfDishes(() => {
+      return listOfDishes.filter((elem, index) => id !== index)
+    });
+    setTotalCost(() => {
+      return totalCost - costOfTheDish;
+    });
+  }
+
+  const handleDeleteAllDishes = () => {
+    setListOfDishes(() => [])
+    setTotalCost(() => 0)
+  }
+
   return (
-    <DishContext.Provider value={{ listOfDishes, handleChangeCountOfDishes, totalCost }}>
+    <DishContext.Provider value={{ listOfDishes, handleChangeCountOfDishes, totalCost, handleDeleteOfTheDish }}>
       <div>
         <div className='page'>
           <Header />
@@ -57,6 +71,7 @@ const Bucket = () => {
               <h1 className='bucket-list__main-text'>Итого: {totalCost} руб.</h1>
               <div className='bucket-list__total-cost-block__buttons'>
                 <BucketButton
+                  handleFunction={handleDeleteAllDishes}
                   innerText={'Очистить все'} />
                 <BucketButton
                   innerText={'Бронирование'} />

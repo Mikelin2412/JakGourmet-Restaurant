@@ -21,11 +21,22 @@ const Counter = ({totalCost, dishCost, countOfDishes, handleClick, id}) => {
 
     return (
         <div className={classes.counter}>
-            <button type='button' className={classes.increaseButton} onClick={increase}>+</button>
+            <button
+                type='button'
+                className={classes.increaseButton}
+                onClick={increase}>+</button>
             <div className={classes.counterInputBlock}>
-                <input className={classes.counterInput} type='number' min='1' value={value}/>
+                <input 
+                    className={classes.counterInput}
+                    type='number'
+                    min='1'
+                    value={value}
+                    onChange={() => {setValue(value)}}/>
             </div>
-            <button type='button' className={classes.decreaseButton} onClick={decrease}>-</button>
+            <button
+                type='button'
+                className={classes.decreaseButton}
+                onClick={decrease}>-</button>
         </div>
     )
 }
