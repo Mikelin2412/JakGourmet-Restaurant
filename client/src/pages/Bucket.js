@@ -1,8 +1,9 @@
 import React, { useState, createContext } from 'react'
 import Header from '../components/Header'
-import DishItemInBucket from '../UI/dishItemInBucket/DishItemInBucket'
+import DishItemsInBucket from '../UI/dishItemsInBucket/DishItemsInBucket'
 import '../styles/Bucket.css'
 import Footer from '../components/Footer'
+import BucketButton from '../UI/bucketButton/BucketButton'
 
 export const DishContext = createContext({});
 
@@ -40,13 +41,22 @@ const Bucket = () => {
   }
 
   return (
-    <DishContext.Provider value={{listOfDishes, handleChangeCountOfDishes}}>
+    <DishContext.Provider value={{ listOfDishes, handleChangeCountOfDishes }}>
       <div>
         <div className='page'>
           <Header />
           <div className='bucket-list'>
-            <h1 className='bucket-list__title'>Корзина</h1>
-            <DishItemInBucket />
+            <h1 className='bucket-list__main-text'>Корзина</h1>
+            <DishItemsInBucket />
+            <div className='bucket-list__total-cost-block'>
+              <h1 className='bucket-list__main-text'>Итого: 128 руб.</h1>
+              <div className='bucket-list__total-cost-block__buttons'>
+                <BucketButton
+                  innerText={'Очистить все'} />
+                <BucketButton
+                  innerText={'Бронирование'} />
+              </div>
+            </div>
           </div>
         </div>
         <Footer />

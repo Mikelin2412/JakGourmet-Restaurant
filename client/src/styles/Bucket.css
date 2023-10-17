@@ -2,11 +2,22 @@
     margin: 0 85px;
 }
 
-.bucket-list__title {
+.bucket-list__main-text {
     color: #1D1D1D;
     font-family: Roboto;
     font-size: 28px;
     font-style: normal;
     font-weight: 400;
     line-height: 34px;
+}
+
+.bucket-list__total-cost-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bucket-list__total-cost-block__buttons {
+    display: flex;
+    gap: 20px;
 }

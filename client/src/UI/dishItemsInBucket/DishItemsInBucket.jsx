@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { DishContext } from '../../pages/Bucket'
 import BucketButton from '../bucketButton/BucketButton'
 import Counter from '../counter/Counter'
-import classes from './dishItemInBucket.module.css'
+import classes from './dishItemsInBucket.module.css'
 
-const DishItemInBucket = () => {
+const DishItemsInBucket = () => {
   const {listOfDishes, handleChangeCountOfDishes} = useContext(DishContext);
 
   return (
@@ -31,4 +31,4 @@ const DishItemInBucket = () => {
   )
 }
 
-export default DishItemInBucket
+export default DishItemsInBucket
