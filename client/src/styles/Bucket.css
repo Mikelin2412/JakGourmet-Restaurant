@@ -21,3 +21,23 @@
     display: flex;
     gap: 20px;
 }
+
+.modal__reservation__title {
+    margin: 0;
+    color: #000;
+    font-family: Tinos;
+    font-size: 54px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.modal__reservation__fields-block {
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-top: 1px solid #000;
+}
