@@ -1,9 +1,12 @@
 import React from 'react'
+import classes from './modalWindow.module.css'
 
-const ModalWindow = () => {
+const ModalWindow = ({children}) => {
   return (
-    <div>
-      
+    <div className={classes.modalWindow}>
+      <div className={classes.modalWindowContent}>
+        {children}
+      </div>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import DishItemsInBucket from '../UI/dishItemsInBucket/DishItemsInBucket'
 import '../styles/Bucket.css'
 import Footer from '../components/Footer'
 import BucketButton from '../UI/bucketButton/BucketButton'
+import ModalWindow from '../UI/modalWindow/ModalWindow'
 
 export const DishContext = createContext({});
 
@@ -80,6 +81,7 @@ const Bucket = () => {
           </div>
         </div>
         <Footer />
+        <ModalWindow></ModalWindow>
       </div>
     </DishContext.Provider>
   )
