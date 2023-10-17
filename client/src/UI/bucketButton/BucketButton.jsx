@@ -7,6 +7,8 @@ const BucketButton = ({ innerText, handleFunction, id, dishCost, countOfDishes }
       handleFunction(id, dishCost * countOfDishes);
     } else if (innerText === 'Очистить все') {
       handleFunction();
+    } else if (innerText === 'Бронирование') {
+      handleFunction(true);
     }
   }
 

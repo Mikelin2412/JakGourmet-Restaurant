@@ -1,10 +1,10 @@
 import React from 'react'
-import classes from './modalWindow.module.css'
+import './modalWindow.css'
 
-const ModalWindow = ({children}) => {
+const ModalWindow = ({active, setActive, children}) => {
   return (
-    <div className={classes.modalWindow}>
-      <div className={classes.modalWindowContent}>
+    <div className={(active) ? 'modal-window active' : 'modal-window'} onClick={() => {setActive(false)}}>
+      <div className={(active) ? 'modal-window-content active' : 'modal-window-content'} onClick={e => e.stopPropagation()}>
         {children}
       </div>
     </div>

@@ -32,6 +32,8 @@ const Bucket = () => {
 
   const [totalCost, setTotalCost] = useState(60);
 
+  const [modalActive, setModalActive] = useState(false);
+
   const handleChangeCountOfDishes = (value, index, finalCost) => {
     setListOfDishes(() => {
       return listOfDishes.map((elem, ind) => {
@@ -75,13 +77,18 @@ const Bucket = () => {
                   handleFunction={handleDeleteAllDishes}
                   innerText={'Очистить все'} />
                 <BucketButton
-                  innerText={'Бронирование'} />
+                  innerText={'Бронирование'} 
+                  handleFunction={setModalActive}/>
               </div>
             </div>
           </div>
         </div>
         <Footer />
-        <ModalWindow></ModalWindow>
+        <ModalWindow
+          active={modalActive}
+          setActive={setModalActive}>
+            <h1>Бронирование</h1>
+        </ModalWindow>
       </div>
     </DishContext.Provider>
   )
