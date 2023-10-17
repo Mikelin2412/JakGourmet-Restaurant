@@ -5,7 +5,7 @@ import Counter from '../counter/Counter'
 import classes from './dishItemsInBucket.module.css'
 
 const DishItemsInBucket = () => {
-  const {listOfDishes, handleChangeCountOfDishes} = useContext(DishContext);
+  const {listOfDishes, handleChangeCountOfDishes, totalCost} = useContext(DishContext);
 
   return (
     <>
@@ -21,6 +21,8 @@ const DishItemsInBucket = () => {
                 innerText={'Удалить'} />
             </div>
             <Counter
+              totalCost={totalCost}
+              dishCost={elem.dishCost}
               countOfDishes={elem.numberOfServings}
               handleClick={handleChangeCountOfDishes}
               id={index}/>

@@ -13,13 +13,13 @@ const Bucket = () => {
       dishName: 'Cало домашнее с горчицей',
       description: 'Вкусно и точка',
       dishCost: 32,
-      numberOfServings: 2,
+      numberOfServings: 1,
     },
     {
       dishName: 'sdfdsf',
       description: 'sdfdsf',
       dishCost: 13,
-      numberOfServings: 3,
+      numberOfServings: 1,
     },
     {
       dishName: 'papapapa',
@@ -29,7 +29,9 @@ const Bucket = () => {
     }
   ]);
 
-  const handleChangeCountOfDishes = (value, index) => {
+  const [totalCost, setTotalCost] = useState(60);
+
+  const handleChangeCountOfDishes = (value, index, finalCost) => {
     setListOfDishes(() => {
       return listOfDishes.map((elem, ind) => {
         if (ind === index) {
@@ -38,10 +40,13 @@ const Bucket = () => {
         return elem;
       });
     });
+    setTotalCost(() => {
+      return finalCost;
+    });
   }
 
   return (
-    <DishContext.Provider value={{ listOfDishes, handleChangeCountOfDishes }}>
+    <DishContext.Provider value={{ listOfDishes, handleChangeCountOfDishes, totalCost }}>
       <div>
         <div className='page'>
           <Header />
@@ -49,7 +54,7 @@ const Bucket = () => {
             <h1 className='bucket-list__main-text'>Корзина</h1>
             <DishItemsInBucket />
             <div className='bucket-list__total-cost-block'>
-              <h1 className='bucket-list__main-text'>Итого: 128 руб.</h1>
+              <h1 className='bucket-list__main-text'>Итого: {totalCost} руб.</h1>
               <div className='bucket-list__total-cost-block__buttons'>
                 <BucketButton
                   innerText={'Очистить все'} />

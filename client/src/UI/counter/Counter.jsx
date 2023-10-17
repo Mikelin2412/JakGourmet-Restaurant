@@ -1,12 +1,12 @@
 import {React, useState} from 'react'
 import classes from './counter.module.css'
 
-const Counter = ({countOfDishes, handleClick, id}) => {
+const Counter = ({totalCost, dishCost, countOfDishes, handleClick, id}) => {
     const [value, setValue] = useState(countOfDishes);
 
     const increase = () => {
         setValue(value + 1);
-        handleClick(value + 1, id);
+        handleClick(value + 1, id, totalCost + dishCost);
     }
 
     const decrease = () => {
@@ -15,7 +15,7 @@ const Counter = ({countOfDishes, handleClick, id}) => {
         }
         else {
             setValue(() => value - 1);
-            handleClick(value - 1, id);
+            handleClick(value - 1, id, totalCost - dishCost);
         }
     }
 
