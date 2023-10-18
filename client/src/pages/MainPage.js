@@ -5,6 +5,7 @@ import MainSectionCards from '../UI/mainSectionCard/MainSectionCards';
 import images from '../assets/images/images.png';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import ClientsReviews from '../components/ClientsReviews';
 
 const MainPage = () => {
     const mainSectionCardsInfo = [
@@ -83,6 +84,7 @@ const MainPage = () => {
                     />
                 </div>
             </section>
+            <ClientsReviews/>
             <Footer />
         </>
     );
