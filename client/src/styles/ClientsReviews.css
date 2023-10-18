@@ -1,5 +1,5 @@
 .clients-reviews-section {
-    padding: 85px 250px;
+    padding: 45px 250px 75px;
     background-color: #E5E5E5;
 }
 
@@ -14,8 +14,19 @@
     max-width: 100px;
 }
 
+.clients-reviews-section__content__title {
+    margin: 0;
+    color: #000;
+    font-family: Tinos;
+    font-size: 54px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .clients-reviews-section__content__review {
     margin: 0;
+    margin-top: 25px;
     color: #000;
     text-align: center;
     font-family: Open Sans;

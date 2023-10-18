@@ -6,8 +6,9 @@ const ClientsReviews = () => {
   return (
     <section className='clients-reviews-section'>
       <div className='clients-reviews-section__content'>
+        <h1 className='clients-reviews-section__content__title'>Отзывы</h1>
         <p className='clients-reviews-section__content__review'>Я надолго запомню мой День рождения, проведённый в этом ресторане! 
-            Кусочек родной Армении!!! Отдельное спасибо за комплепент в виде фруктовой тарелки. 
+            Кусочек родной Армении!!! Отдельное спасибо за комплимент в виде фруктовой тарелки. 
             Будем рекомендовать этот ресторан своим друзьям и родственникам также за рубежом, путешествующих в Санкт-Петербург!!!</p>
         <img className='clients-reviews-section__content__profile-icon' src={icon} alt='profile icon'/>
         <h4 className='clients-reviews-section__content__visitor'>Посетитель</h4>

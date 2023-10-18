@@ -5,8 +5,8 @@ import './MainSectionCards.css'
 const MainSectionCards = ({ infoForCards }) => {
   return (
     <>
-        {infoForCards.map((elem) =>
-            <div className='main-section-card'>
+        {infoForCards.map((elem, index) =>
+            <div key={index} className='main-section-card'>
                 <img
                     src={mask}
                     alt='mask group'
