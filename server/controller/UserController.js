@@ -43,11 +43,7 @@ class UserController {
     }
 
     async check(req, res, next) {
-        const {id} = req.query;
-        if (!id) {
-            return next(ApiError.badRequest('Не задан ID пользователя'));
-        }
-        res.json(id);
+        res.json('Валидация прошла успешно!');
     }
 };
 
