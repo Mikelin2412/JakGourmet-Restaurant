@@ -11,7 +11,6 @@ module.exports = function(req, res, next) {
         }
         const decodedUser = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decodedUser;
-        console.log("\nДЕКОДИРОВАННЫЙ ПОЛЬЗОВАТЕЛЬ: ") + decodedUser;
         next();
     } catch (e) {
         return res.status(401).json('Пользователь не авторизован!');

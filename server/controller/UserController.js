@@ -3,7 +3,7 @@ const ApiError = require('../errors/ApiError');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const jenerateToken = (id, email, name) => {
+const generateToken = (id, email, name) => {
     return jwt.sign(
         {id, email, name},
         process.env.SECRET_KEY,
@@ -23,7 +23,7 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 3);
         const user = await User.create({name, email, password: hashPassword});
         const role = await UserRoles.create({userId: user.id, role: 'USER'});
-        const token = jenerateToken(user.id, user.email, user.name);
+        const token = generateToken(user.id, user.email, user.name);
 
         return res.json({token});
     }
@@ -38,12 +38,13 @@ class UserController {
         if (!comparePassword) {
             return next(ApiError.badRequest('Указан неверный пароль!'));
         }
-        const token = jenerateToken(user.id, user.email, user.name);
+        const token = generateToken(user.id, user.email, user.name);
         return res.json({token});
     }
 
     async check(req, res, next) {
-        res.json('Валидация прошла успешно!');
+        const token = generateToken(req.user.id, req.user.email, req.user.name);
+        return res.json({token});
     }
 };
 
