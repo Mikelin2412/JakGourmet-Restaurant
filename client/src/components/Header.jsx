@@ -21,15 +21,13 @@ const Header = () => {
                     <NavLink to="/menu" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>МЕНЮ</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/bucket" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>КОРЗИНА</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/reservation" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>БРОНЬ</NavLink>
+                    <NavLink to="/bucket" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>КОРЗИНА БЛЮД</NavLink>
                 </li>
             </ul>
             <Button
-                value="ЗАКАЗ СТОЛИКА"
-            />
+                value="ВОЙТИ"></Button>
+            <Button
+                value="ЗАРЕГИСТРИРОВАТЬСЯ"></Button>
         </nav>
     </header>
   )

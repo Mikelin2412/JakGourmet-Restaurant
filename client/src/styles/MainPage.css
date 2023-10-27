@@ -100,6 +100,11 @@ body {
     list-style: none;
 }
 
+.navigation-menu__items > li:last-child {
+    padding: 15px 15px 15px 0;
+    border-right: 1px solid #fff;
+}
+
 .nav-links {
     text-decoration: none;
     font-family: 'Open Sans';
