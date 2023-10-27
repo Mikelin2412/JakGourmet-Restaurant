@@ -3,6 +3,7 @@
     height: 47px;
     background: #FF7400;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
 
     color: #FFF;
