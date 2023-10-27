@@ -1,4 +1,4 @@
-import AuthPopup from "./pages/Authorization";
+import Authorization from "./pages/Authorization";
 import Bucket from "./pages/Bucket";
 import Dish from "./pages/Dish";
 import MainPage from "./pages/MainPage";
@@ -32,10 +32,10 @@ export const publicRoutes = [
     },
     {
         path: LOGIN_ROUTE,
-        Component: AuthPopup
+        Component: Authorization
     },
     {
         path: REGISTRATION_ROUTE,
-        Component: AuthPopup
+        Component: Authorization
     },
 ]
