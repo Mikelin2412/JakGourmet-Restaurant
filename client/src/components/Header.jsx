@@ -4,7 +4,8 @@ import icon from '../assets/images/icon-profile.png'
 import { Context } from '..';
 import { NavLink } from 'react-router-dom';
 import Button from '../UI/button/Button';
-import { observer } from 'mobx-react-lite'
+import { observer } from 'mobx-react-lite';
+import {LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE} from '../utils/consts'
 
 const Header = observer(() => {
     const { user } = useContext(Context);
@@ -22,35 +23,39 @@ const Header = observer(() => {
                     <>
                         <ul className='navigation-menu__items'>
                             <li>
-                                <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ГЛАВНАЯ</NavLink>
+                                <NavLink to={MAIN_PAGE_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ГЛАВНАЯ</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/menu" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>МЕНЮ</NavLink>
+                                <NavLink to={MENU_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>МЕНЮ</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/bucket" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>КОРЗИНА БЛЮД</NavLink>
+                                <NavLink to={BUCKET_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>КОРЗИНА БЛЮД</NavLink>
                             </li>
                         </ul>
                         <img className='navigation-menu__profile-icon' src={icon} alt='icon'></img>
                         <Button
                             value="ВЫЙТИ"
-                            handleClick={() => {user.setIsAuth(false)}}></Button>
+                            handleClick={() => { user.setIsAuth(false) }}></Button>
                     </> :
                     <>
                         <ul className='navigation-menu__items'>
                             <li>
-                                <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ГЛАВНАЯ</NavLink>
+                                <NavLink to={MAIN_PAGE_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ГЛАВНАЯ</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/menu" className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>МЕНЮ</NavLink>
+                                <NavLink to={MENU_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>МЕНЮ</NavLink>
                             </li>
                         </ul>
-                        <Button
-                            value="ВОЙТИ" 
-                            handleClick={() => {user.setIsAuth(true)}}></Button>
-                        <Button
-                            value="ЗАРЕГИСТРИРОВАТЬСЯ"
-                            handleClick={() => {user.setIsAuth(true)}}></Button>
+                        <NavLink to={LOGIN_ROUTE}>
+                            <Button
+                                value="ВОЙТИ"
+                                handleClick={() => { user.setIsAuth(true) }}></Button>
+                        </NavLink>
+                        <NavLink to={REGISTRATION_ROUTE}>
+                            <Button
+                                value="ЗАРЕГИСТРИРОВАТЬСЯ"
+                                handleClick={() => { user.setIsAuth(true) }}></Button>
+                        </NavLink>
                     </>}
             </nav>
         </header>
