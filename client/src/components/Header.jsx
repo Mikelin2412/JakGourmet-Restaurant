@@ -10,6 +10,11 @@ import {LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROU
 const Header = observer(() => {
     const { user } = useContext(Context);
 
+    const logout = () => {
+        user.setUser({});
+        user.setIsAuth(false);
+    }
+
     return (
         <header className='header'>
             <img
@@ -35,7 +40,7 @@ const Header = observer(() => {
                         <img className='navigation-menu__profile-icon' src={icon} alt='icon'></img>
                         <Button
                             value="ВЫЙТИ"
-                            handleClick={() => { user.setIsAuth(false) }}></Button>
+                            handleClick={logout}></Button>
                     </> :
                     <>
                         <ul className='navigation-menu__items'>
@@ -48,13 +53,11 @@ const Header = observer(() => {
                         </ul>
                         <NavLink to={LOGIN_ROUTE}>
                             <Button
-                                value="ВОЙТИ"
-                                handleClick={() => { user.setIsAuth(true) }}></Button>
+                                value="ВОЙТИ"></Button>
                         </NavLink>
                         <NavLink to={REGISTRATION_ROUTE}>
                             <Button
-                                value="ЗАРЕГИСТРИРОВАТЬСЯ"
-                                handleClick={() => { user.setIsAuth(true) }}></Button>
+                                value="ЗАРЕГИСТРИРОВАТЬСЯ"></Button>
                         </NavLink>
                     </>}
             </nav>
