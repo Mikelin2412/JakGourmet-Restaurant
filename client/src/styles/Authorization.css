@@ -88,3 +88,12 @@
     font-weight: 400;
     line-height: 21px;
 }
+
+.auth-form__bottom-info-and-buttons__type-of-auth {
+    color: #fff;
+    transition: all .3s;
+}
+
+.auth-form__bottom-info-and-buttons__type-of-auth:hover {
+    color: #c9c9c9;
+}

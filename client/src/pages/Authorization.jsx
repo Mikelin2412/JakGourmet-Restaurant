@@ -36,12 +36,12 @@ const Authorization = () => {
                         </div>
                         {isLogin ?
                             <div className='auth-form__bottom-info-and-buttons'>
-                                <span>Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрироваться</NavLink></span>
+                                <span>Нет аккаунта? <NavLink to={REGISTRATION_ROUTE} className='auth-form__bottom-info-and-buttons__type-of-auth'>Зарегистрироваться</NavLink></span>
                                 <BucketButton innerText='Войти' />
                             </div>
                             :
                             <div className='auth-form__bottom-info-and-buttons'>
-                                <span>Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войти</NavLink></span>
+                                <span>Есть аккаунт? <NavLink to={LOGIN_ROUTE} className='auth-form__bottom-info-and-buttons__type-of-auth'>Войти</NavLink></span>
                                 <BucketButton innerText='Зарегистрироваться' />
                             </div>
                         }

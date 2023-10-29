@@ -9,4 +9,9 @@
     font-style: normal;
     font-weight: 500;
     line-height: 21px;
+    transition: all .3s;
+}
+
+.button:hover {
+    background-color: #363636;
 }
