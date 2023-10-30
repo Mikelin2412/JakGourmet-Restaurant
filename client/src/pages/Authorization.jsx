@@ -24,12 +24,12 @@ const Authorization = observer(() => {
             let userData;
             if (isLogin) {
                 userData = await userLogin(name, email, password);
-                console.log(user);
+                console.log(userData);
             } else {
                 userData = await userRegistration(name, email, password);
-                console.log(user);
+                console.log(userData);
             }
-            user.setUser(userData);
+            user.setUser(true);
             user.setIsAuth(true);
             navigate(MAIN_PAGE_ROUTE);
         } catch(e) {

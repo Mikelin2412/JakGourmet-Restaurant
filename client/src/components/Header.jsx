@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import logo from '../assets/images/LOGO.svg';
 import icon from '../assets/images/icon-profile.png'
 import { Context } from '..';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Button from '../UI/button/Button';
 import { observer } from 'mobx-react-lite';
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE} from '../utils/consts'
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE } from '../utils/consts'
 
 const Header = observer(() => {
     const { user } = useContext(Context);
@@ -14,6 +14,7 @@ const Header = observer(() => {
         user.setUser({});
         user.setIsAuth(false);
         localStorage.removeItem('token');
+        localStorage.clear();
     }
 
     return (
@@ -39,9 +40,11 @@ const Header = observer(() => {
                             </li>
                         </ul>
                         <img className='navigation-menu__profile-icon' src={icon} alt='icon'></img>
-                        <Button
-                            value="ВЫЙТИ"
-                            handleClick={logout}></Button>
+                        <NavLink to={MAIN_PAGE_ROUTE}>
+                            <Button
+                                value="ВЫЙТИ"
+                                handleClick={logout}></Button>
+                        </NavLink>
                     </> :
                     <>
                         <ul className='navigation-menu__items'>
