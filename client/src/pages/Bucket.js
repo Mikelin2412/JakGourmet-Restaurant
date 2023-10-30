@@ -75,7 +75,7 @@ const Bucket = () => {
               <div className='bucket-list__total-cost-block__buttons'>
                 <BucketButton
                   handleFunction={handleDeleteAllDishes}
-                  innerText={'Очистить все'} />
+                  innerText={'Очистить все'}/>
                 <BucketButton
                   innerText={'Бронирование'} 
                   handleFunction={setModalActive}/>

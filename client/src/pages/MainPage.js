@@ -35,7 +35,7 @@ const MainPage = () => {
                     </div>
                     <Link to="/menu">
                         <Button 
-                            value='VIEW MENU'
+                            value='НАШЕ МЕНЮ'
                         />
                     </Link>
                 </div>
@@ -80,7 +80,7 @@ const MainPage = () => {
                         <p>Только в этом месяце бизнес-ланч от 15 рублей</p>
                     </div>
                     <Button
-                        value='ЗАКАЗ СТОЛИКА'
+                        value='НАШЕ МЕНЮ'
                     />
                 </div>
             </section>

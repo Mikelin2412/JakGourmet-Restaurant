@@ -9,6 +9,8 @@ const BucketButton = ({ innerText, handleFunction, id, dishCost, countOfDishes }
       handleFunction();
     } else if (innerText === 'Бронирование') {
       handleFunction(true);
+    } else if (innerText === 'Зарегистрироваться' || innerText === 'Войти') {
+      handleFunction();
     }
   }
 
