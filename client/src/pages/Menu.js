@@ -9,12 +9,13 @@ import ModalWindow from '../UI/modalWindow/ModalWindow'
 import { useNavigate, useParams } from 'react-router-dom'
 import { MENU_ROUTE } from '../utils/consts'
 import BucketButton from '../UI/bucketButton/BucketButton'
+import AdminHeader from '../components/AdminHeader'
 
 const Menu = () => {
-  const { dish } = useContext(Context);
+  const { user, dish } = useContext(Context);
   const [modalActive, setModalActive] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   function handleClose() {
     navigate(MENU_ROUTE);
@@ -24,7 +25,11 @@ const Menu = () => {
   return (
     <>
       <div className='page'>
-        <Header />
+        {user.role === 'ADMIN' ?
+          <AdminHeader />
+          :
+          <Header />
+        }
         <TypesOfDishesNavigation />
         <div className='list-of-dishes'>
           <h1 className='list-of-dishes__title'>Закуски</h1>
@@ -65,7 +70,7 @@ const Menu = () => {
             </div>
             <div className='dish-modal__buttons'>
               <BucketButton
-                innerText={'Назад'}/>
+                innerText={'Назад'} />
               <BucketButton
                 innerText={'В корзину'} />
             </div>

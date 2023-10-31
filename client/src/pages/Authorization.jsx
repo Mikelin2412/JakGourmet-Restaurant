@@ -29,8 +29,9 @@ const Authorization = observer(() => {
                 userData = await userRegistration(name, email, password);
                 console.log(userData);
             }
-            user.setUser(true);
+            user.setUser(userData);
             user.setIsAuth(true);
+            user.setRole(userData.role);
             navigate(MAIN_PAGE_ROUTE);
         } catch(e) {
             alert(e.response.data.message);

@@ -13,6 +13,7 @@ const Header = observer(() => {
     const logout = () => {
         user.setUser({});
         user.setIsAuth(false);
+        user.setRole('');
         localStorage.removeItem('token');
         localStorage.clear();
     }

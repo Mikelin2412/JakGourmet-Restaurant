@@ -1,14 +1,18 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useContext } from 'react'
 import Header from '../components/Header'
 import DishItemsInBucket from '../UI/dishItemsInBucket/DishItemsInBucket'
 import '../styles/Bucket.css'
 import Footer from '../components/Footer'
 import BucketButton from '../UI/bucketButton/BucketButton'
 import ReservationPopup from '../components/ReservationPopup'
+import { observer } from 'mobx-react-lite'
+import { Context } from '..'
+import AdminHeader from '../components/AdminHeader'
 
 export const DishContext = createContext({});
 
-const Bucket = () => {
+const Bucket = observer(() => {
+  const { user } = useContext(Context);
   const [listOfDishes, setListOfDishes] = useState([
     {
       dishName: 'Вегамикс',
@@ -66,7 +70,11 @@ const Bucket = () => {
     <DishContext.Provider value={{ listOfDishes, handleChangeCountOfDishes, totalCost, handleDeleteOfTheDish }}>
       <div>
         <div className='page'>
-          <Header />
+          {user.role === 'ADMIN' ?
+            <AdminHeader />
+            :
+            <Header />
+          }
           <div className='bucket-list'>
             <h1 className='bucket-list__main-text'>Корзина</h1>
             <DishItemsInBucket />
@@ -75,10 +83,10 @@ const Bucket = () => {
               <div className='bucket-list__total-cost-block__buttons'>
                 <BucketButton
                   handleFunction={handleDeleteAllDishes}
-                  innerText={'Очистить все'}/>
+                  innerText={'Очистить все'} />
                 <BucketButton
-                  innerText={'Бронирование'} 
-                  handleFunction={setModalActive}/>
+                  innerText={'Бронирование'}
+                  handleFunction={setModalActive} />
               </div>
             </div>
           </div>
@@ -86,10 +94,10 @@ const Bucket = () => {
         <Footer />
         <ReservationPopup
           active={modalActive}
-          setActive={setModalActive}/>
+          setActive={setModalActive} />
       </div>
     </DishContext.Provider>
   )
-}
+})
 
 export default Bucket
