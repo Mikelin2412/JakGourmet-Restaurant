@@ -8,6 +8,7 @@ import { Context } from '..'
 import ModalWindow from '../UI/modalWindow/ModalWindow'
 import { useNavigate, useParams } from 'react-router-dom'
 import { MENU_ROUTE } from '../utils/consts'
+import BucketButton from '../UI/bucketButton/BucketButton'
 
 const Menu = () => {
   const { dish } = useContext(Context);
@@ -61,6 +62,12 @@ const Menu = () => {
                 <img className='dish-modal__image-and-price__image' src={dish.dishes[id - 1].img} alt={dish.dishes[id - 1].name}></img>
                 <p className='dish-modal__image-and-price__price'>Стоимость: {dish.dishes[id - 1].price} руб.</p>
               </div>
+            </div>
+            <div className='dish-modal__buttons'>
+              <BucketButton
+                innerText={'Назад'}/>
+              <BucketButton
+                innerText={'В корзину'} />
             </div>
           </ModalWindow> : null
       }
