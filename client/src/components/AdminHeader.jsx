@@ -5,7 +5,7 @@ import { Context } from '..';
 import { NavLink } from 'react-router-dom';
 import Button from '../UI/button/Button';
 import { observer } from 'mobx-react-lite';
-import { MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE } from '../utils/consts'
+import { MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE, ORDERS_ROUTE } from '../utils/consts'
 
 const AdminHeader = observer(() => {
     const { user } = useContext(Context);
@@ -38,7 +38,7 @@ const AdminHeader = observer(() => {
                         <NavLink to={BUCKET_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>КОРЗИНА БЛЮД</NavLink>
                     </li>
                     <li>
-                        <NavLink to={BUCKET_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ЗАКАЗЫ</NavLink>
+                        <NavLink to={ORDERS_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ЗАКАЗЫ</NavLink>
                     </li>
                 </ul>
                 <img className='navigation-menu__profile-icon' src={icon} alt='icon'></img>
