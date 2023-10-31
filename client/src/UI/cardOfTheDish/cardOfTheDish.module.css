@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;700&family=Inika:wght@700&family=Inter:wght@300;400;700&family=Open+Sans:wght@400;700&family=Roboto&family=Tinos&display=swap');
 
 .cardOfTheDish {
-    /* width: 470px; */
     display: flex;
     justify-content: space-between;
     border: 1px solid rgba(117, 117, 117, 0.2);
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.cardOfTheDish:hover {
+    box-shadow: 0 0 7px 1px rgba(110, 110, 110, 0.3);
 }
 
 .information {

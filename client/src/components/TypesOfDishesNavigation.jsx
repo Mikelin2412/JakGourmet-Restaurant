@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Context } from '..'
 
 const TypesOfDishesNavigation = () => {
+  const {dish} = useContext(Context);
+
   return (
     <div className='types-of-dishes-navigation'>
       <ul className='types-of-dishes-navigation__items'>
-        <li>Закуски</li>
-        <li>Салаты</li>
-        <li>Супы</li>
-        <li>Горячие блюда</li>
-        <li>Гарниры</li>
-        <li>Десерты</li>
+        {
+          dish.types.map((item) => 
+            <li key={item.id}>{item.type_name}</li>
+          )
+        }
       </ul>
     </div>
   )

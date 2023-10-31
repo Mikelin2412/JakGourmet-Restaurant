@@ -1,4 +1,5 @@
 import {makeAutoObservable} from 'mobx'
+import image from '../assets/images/Capture.png'
 
 export default class DishStore {
     constructor() {
@@ -11,8 +12,8 @@ export default class DishStore {
             {id: 6, type_name: 'Десерты'}
         ];
         this._dishes = [
-            {id: 1, name: 'Селедка под шубой', img: '../assets/images/Capture.png', price: 30, description: 'бла бла бла', weight: 150},
-            {id: 2, name: 'Рис', img: '../assets/images/Capture.png', price: 25, description: 'ням ням', weight: 200}
+            {id: 1, name: 'Селедка под шубой', img: image, price: 30, description: 'бла бла бла', weight: 150},
+            {id: 2, name: 'Рис', img: image, price: 25, description: 'ням ням', weight: 200}
         ];
         makeAutoObservable(this);
     }
