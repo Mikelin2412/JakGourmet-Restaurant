@@ -1,17 +1,23 @@
 import React from 'react'
-import seld from '../../assets/images/Capture.png'
+import { useNavigate } from 'react-router-dom';
+import { MENU_ROUTE } from '../../utils/consts';
 import classes from "./cardOfTheDish.module.css";
 
-const cardOfTheDish = () => {
+const CardOfTheDish = ({ id, name, price, image, isOpen }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className={classes.cardOfTheDish}>
+      <div className={classes.cardOfTheDish} onClick={() => {
+          navigate(MENU_ROUTE + '/' + id);
+          isOpen(true);
+        }}>
         <div className={classes.information}>
-            <h1 className={classes.title}>Сельдь на бородинском хлебе</h1>
-            <h3 className={classes.price}>32 руб.</h3>
+          <h1 className={classes.title}>{name}</h1>
+          <h3 className={classes.price}>{price} руб.</h3>
         </div>
-      <img src={seld} alt='seld' />
-    </div>
+        <img src={image} alt='seld' />
+      </div>
   )
 }
 
-export default cardOfTheDish
+export default CardOfTheDish
