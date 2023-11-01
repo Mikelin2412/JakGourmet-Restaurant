@@ -10,10 +10,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { MENU_ROUTE } from '../utils/consts'
 import BucketButton from '../UI/bucketButton/BucketButton'
 import AdminHeader from '../components/AdminHeader'
+import AdminAddDishWindow from '../components/AdminAddDishWindow'
 
 const Menu = () => {
   const { user, dish } = useContext(Context);
   const [modalActive, setModalActive] = useState(false);
+  const [addDishWindow, setAddDishWindow] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -32,7 +34,17 @@ const Menu = () => {
         }
         <TypesOfDishesNavigation />
         <div className='list-of-dishes'>
-          <h1 className='list-of-dishes__title'>Закуски</h1>
+          {
+            user.role === 'ADMIN' ?
+             <div className='list-of-dishes__admin-panel'>
+              <h1 className='list-of-dishes__title'>Закуски</h1>
+              <button
+                className='list-of-dishes__add-dish'
+                onClick={() => setAddDishWindow(true)}>Добавить блюдо</button>
+             </div>
+             :
+             <h1 className='list-of-dishes__title'>Закуски</h1>
+          }
           <div className='list-of-dishes__cards-block'>
             {
               dish.dishes.map((dish) =>
@@ -75,6 +87,13 @@ const Menu = () => {
                 innerText={'В корзину'} />
             </div>
           </ModalWindow> : null
+      }
+      {
+        addDishWindow ?
+        <AdminAddDishWindow
+          active={addDishWindow}
+          setActive={setAddDishWindow}>
+        </AdminAddDishWindow> : null
       }
     </>
   )
