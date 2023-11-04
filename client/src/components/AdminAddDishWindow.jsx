@@ -37,6 +37,10 @@ const AdminAddDishWindow = ({active, setActive}) => {
                 <label id='weight'>Масса: </label>
                 <input id='weight' type='number' min='0'></input>
               </div>
+              <div>
+                <label id='image'>Добавить изображение: </label>
+                <input id='image' type='file' accept='.jpg, .jpeg, .png'></input>
+              </div>
             </div>
             <button className='add-dish-window__form__fields__add-button'>Добавить</button>
           </div>
