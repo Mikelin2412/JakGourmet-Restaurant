@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import logo from '../assets/images/LOGO.svg';
 import icon from '../assets/images/icon-profile.png'
 import { Context } from '..';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Button from '../UI/button/Button';
 import { observer } from 'mobx-react-lite';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE } from '../utils/consts'
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE, REVIEWS_ROUTE } from '../utils/consts'
 
 const Header = observer(() => {
     const { user } = useContext(Context);
@@ -38,6 +38,9 @@ const Header = observer(() => {
                             </li>
                             <li>
                                 <NavLink to={BUCKET_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>КОРЗИНА БЛЮД</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={REVIEWS_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ОТЗЫВЫ</NavLink>
                             </li>
                         </ul>
                         <img className='navigation-menu__profile-icon' src={icon} alt='icon'></img>
