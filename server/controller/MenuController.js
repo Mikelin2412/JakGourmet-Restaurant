@@ -1,10 +1,26 @@
+const ApiError = require("../errors/ApiError");
+const { Dish } = require("../model/models");
+
 class MenuController {
-    async addDish(req, res) {
-        res.json("У тебя есть доступ!");
+    async addDish(req, res, next) {
+        const {name, description, price, weight, image} = req.body;
+        if (!name || !description || !price || !weight || !image) {
+            next(ApiError.badRequest('Введены не все данные!'));
+        }
+        const isDishCreated = await Dish.findOne({where: {name}});
+        if (isDishCreated) {
+            next(ApiError.badRequest('Блюдо с таким названием уже существует!'));
+        }
+        const dish = await Dish.create({name, description, weight, price, image});
+        return res.json({dish});
     }
 
-    async getAllDishes(req, res) {
-
+    async getAllDishes(req, res, next) {
+        const dishes = await Dish.findAll();
+        if (!dishes.length) {
+            return next(ApiError.badRequest('Блюда не найдены!'));
+        }
+        return res.json({dishes});
     }
 
     async getDish(req, res) {
