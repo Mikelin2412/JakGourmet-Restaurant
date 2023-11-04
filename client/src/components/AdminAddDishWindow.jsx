@@ -3,9 +3,9 @@ import '../styles/AdminAddDishWindow.css'
 
 const AdminAddDishWindow = ({active, setActive}) => {
   return (
-    <div className='add-dish-window'
+    <div className={active ? 'add-dish-window active-adding' : 'add-dish-window'}
       onClick={() => setActive(false)}>
-        <div className='add-dish-window__form'
+        <div className={active ? 'add-dish-window__form active-adding' : 'add-dish-window__form'}
           onClick={(e) => e.stopPropagation()}>
           <div className='add-dish-window__form__fields'>
             <h1 className='add-dish-window__form__fields__title'>Добавление блюда</h1>

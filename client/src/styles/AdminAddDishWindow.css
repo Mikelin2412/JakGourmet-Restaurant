@@ -6,14 +6,28 @@
     align-items: center;
     top: 0;
     left: 0;
+    opacity: 0;
+    pointer-events: none;
     background-color: rgba(0, 0, 0, 0.4);
+    transition: all .3s;
+}
+
+.add-dish-window.active-adding {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .add-dish-window__form {
     position: relative;
+    left: -500px;
     width: 500px;
     height: 100vh;
     background-color: #fff;
+    transition: all .3s;
+}
+
+.add-dish-window__form.active-adding {
+    left: 0;
 }
 
 .add-dish-window__form__fields {
