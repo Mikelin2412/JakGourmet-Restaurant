@@ -31,6 +31,7 @@ const Dish = sequelize.define('dish', {
 });
 
 const DishType = sequelize.define('dish-type', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
 },
 {
