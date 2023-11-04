@@ -3,8 +3,10 @@ const { Dish } = require("../model/models");
 
 class MenuController {
     async addDish(req, res, next) {
-        const {name, description, price, weight, image} = req.body;
-        if (!name || !description || !price || !weight || !image) {
+        const {name, description, price, weight, type} = req.body;
+        const {img} = req.files;
+        
+        if (!name || !description || !price || !weight || !image || !type) {
             next(ApiError.badRequest('Введены не все данные!'));
         }
         const isDishCreated = await Dish.findOne({where: {name}});
