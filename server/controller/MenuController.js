@@ -20,10 +20,17 @@ class MenuController {
         return res.json({dish});
     }
 
-    async getAllDishes(req, res, next) {
-        const dishes = await Dish.findAll();
-        if (!dishes.length) {
-            return next(ApiError.badRequest('Блюда не найдены!'));
+    async getAllDishes(req, res) {
+        let {dishTypeId, limit, page} = req.query;
+        page = page || 1;
+        limit = limit || 9;
+        let offset = page * limit - limit;
+        let dishes;
+        if (!dishTypeId) {
+            dishes = await Dish.findAndCountAll({limit, offset});
+        }
+        if (dishTypeId) {
+            dishes = await Dish.findAndCountAll({where: {dishTypeId}, limit, offset});
         }
         return res.json({dishes});
     }
