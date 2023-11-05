@@ -3,18 +3,11 @@ import image from '../assets/images/Capture.png'
 
 export default class DishStore {
     constructor() {
-        this._types = [
-            {id: 1, type_name: 'Закуски'},
-            {id: 2, type_name: 'Салаты'},
-            {id: 3, type_name: 'Супы'},
-            {id: 4, type_name: 'Горячие блюда'},
-            {id: 5, type_name: 'Гарниры'},
-            {id: 6, type_name: 'Десерты'}
-        ];
+        this._types = [];
         this._dishes = [
-            {id: 1, name: 'Селедка под шубой', img: image, price: 30, description: 'бла бла бла', weight: 150},
-            {id: 2, name: 'Рис', img: image, price: 25, description: 'ням ням', weight: 200}
+            {id: null, name: null, img: null, price: null, description: null, weight: null}
         ];
+        this._type = {};
         makeAutoObservable(this);
     }
 
@@ -24,11 +17,17 @@ export default class DishStore {
     setDishes(dishes) {
         this._dishes = dishes;
     }
+    setSelectedType(type) {
+        this._type = type;
+    }
 
     get types() {
         return this._types;
     }
     get dishes() {
         return this._dishes;
+    }
+    get selectedType() {
+        return this._type;
     }
 }

@@ -32,7 +32,7 @@ class MenuController {
         if (dishTypeId) {
             dishes = await Dish.findAndCountAll({where: {dishTypeId}, limit, offset});
         }
-        return res.json({dishes});
+        return res.json(dishes);
     }
 
     async getDish(req, res) {

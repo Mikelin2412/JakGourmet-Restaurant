@@ -41,3 +41,7 @@
     font-weight: 500;
     line-height: 21px;
 }
+
+.image {
+    max-width: 300px;
+}

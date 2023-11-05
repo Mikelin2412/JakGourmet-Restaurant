@@ -16,7 +16,7 @@ const CardOfTheDish = ({ id, name, price, image, isOpen, setDishId }) => {
           <h1 className={classes.title}>{name}</h1>
           <h3 className={classes.price}>{price} руб.</h3>
         </div>
-        <img src={image} alt='seld' />
+        <img className={classes.image} src={'http://localhost:5050/' + image} alt={name} />
       </div>
   )
 }

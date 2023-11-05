@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../components/Header'
 import CardOfTheDish from '../UI/cardOfTheDish/CardOfTheDish'
 import '../styles/Menu.css'
@@ -11,13 +11,20 @@ import { MENU_ROUTE } from '../utils/consts'
 import BucketButton from '../UI/bucketButton/BucketButton'
 import AdminHeader from '../components/AdminHeader'
 import AdminAddDishWindow from '../components/AdminAddDishWindow'
+import { getAllDishes, getTypes } from '../http/DishAPI'
+import { observer } from 'mobx-react-lite'
 
-const Menu = () => {
+const Menu = observer(() => {
   const { user, dish } = useContext(Context);
   const [modalActive, setModalActive] = useState(false);
   const [addDishWindow, setAddDishWindow] = useState(false);
   const [currentDishId, setCurrentDishId] = useState(1);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getAllDishes().then(data => dish.setDishes(data.rows))
+    getTypes().then(data => dish.setTypes(data))
+  }, []);
 
   function setActiveDish(isActive) {
     setModalActive(isActive);
@@ -55,7 +62,7 @@ const Menu = () => {
                   id={dish.id}
                   name={dish.name}
                   price={dish.price}
-                  image={dish.img}
+                  image={dish.image}
                   isOpen={setModalActive}
                   setDishId={setCurrentDishId} />
               )
@@ -76,7 +83,7 @@ const Menu = () => {
             </div>
           </div>
           <div className='dish-modal__image-and-price'>
-            <img className='dish-modal__image-and-price__image' src={dish.dishes[currentDishId - 1].img} alt={dish.dishes[currentDishId - 1].name}></img>
+            <img className='dish-modal__image-and-price__image' src={'http://localhost:5050/' + dish.dishes[currentDishId - 1].image} alt={dish.dishes[currentDishId - 1].name}></img>
             <p className='dish-modal__image-and-price__price'>Стоимость: {dish.dishes[currentDishId - 1].price} руб.</p>
           </div>
         </div>
@@ -93,6 +100,6 @@ const Menu = () => {
       </AdminAddDishWindow>
     </>
   )
-}
+})
 
 export default Menu

@@ -22,7 +22,7 @@ button {
     justify-content: space-between;
 }
 
-.types-of-dishes-navigation__items > li {
+.types-of-dishes-navigation__items__type {
     list-style-type: none;
     color: #626262;
     font-family: Roboto;
@@ -30,6 +30,16 @@ button {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    cursor: pointer;
+    transition: all .1s;
+}
+
+.types-of-dishes-navigation__items__type:hover {
+    color: #000000;
+}
+
+.types-of-dishes-navigation__items__type.active-type {
+    color: #000000;
 }
 
 .list-of-dishes {
@@ -113,6 +123,7 @@ button {
 }
 
 .dish-modal__image-and-price__image {
+    max-width: 350px;
     border-radius: 5px;
     align-self: flex-end;
 }
