@@ -20,13 +20,11 @@ const AdminAddDishWindow = ({active, setActive}) => {
     formData.append('weight', `${weight}`);
     formData.append('img', image);
     formData.append('dishTypeId', `${type}`);
-    addDish(formData);
+    addDish(formData).then(data => window.location.reload());
   }
 
   const addImage = (e) => {
-    console.log(e.target.files);
     setImage(e.target.files[0]);
-    console.log(e.target.files[0])
   }
 
   return (

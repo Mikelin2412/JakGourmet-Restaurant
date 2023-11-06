@@ -8,7 +8,7 @@ const CardOfTheDish = ({ id, name, price, image, isOpen, setDishId }) => {
 
   return (
       <div className={classes.cardOfTheDish} onClick={() => {
-          navigate(MENU_ROUTE + '/' + id);
+          navigate(MENU_ROUTE + '/' + (id));
           isOpen(true);
           setDishId(id);
         }}>

@@ -1,7 +1,7 @@
 import { $authHost, $host } from "./host";
 
-export const getAllDishes = async () => {
-    const {data} = await $host.get('api/menu/');
+export const getAllDishes = async (dishTypeId) => {
+    const {data} = await $host.get('api/menu/', {params: {dishTypeId}});
     return data;
 }
 

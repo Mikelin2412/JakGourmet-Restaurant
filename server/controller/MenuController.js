@@ -17,20 +17,18 @@ class MenuController {
             return next(ApiError.badRequest('Блюдо с таким названием уже существует!'));
         }
         const dish = await Dish.create({name, description, weight, price, image: fileName, dishTypeId});
-        return res.json({dish});
+        return res.json(dish);
     }
 
     async getAllDishes(req, res) {
-        let {dishTypeId, limit, page} = req.query;
-        page = page || 1;
-        limit = limit || 9;
-        let offset = page * limit - limit;
+        let {dishTypeId} = req.query;
+        console.log('DISH TYPE ID: ' + dishTypeId)
         let dishes;
         if (!dishTypeId) {
-            dishes = await Dish.findAndCountAll({limit, offset});
+            dishes = await Dish.findAll();
         }
         if (dishTypeId) {
-            dishes = await Dish.findAndCountAll({where: {dishTypeId}, limit, offset});
+            dishes = await Dish.findAll({where: {dishTypeId}});
         }
         return res.json(dishes);
     }

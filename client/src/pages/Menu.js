@@ -18,13 +18,17 @@ const Menu = observer(() => {
   const { user, dish } = useContext(Context);
   const [modalActive, setModalActive] = useState(false);
   const [addDishWindow, setAddDishWindow] = useState(false);
-  const [currentDishId, setCurrentDishId] = useState(1);
+  const [currentDishId, setCurrentDishId] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAllDishes().then(data => dish.setDishes(data.rows))
     getTypes().then(data => dish.setTypes(data))
+    getAllDishes().then(data => dish.setDishes(data))
   }, []);
+
+  useEffect(() => {
+    getAllDishes(dish.selectedType.id).then(data => dish.setDishes(data))
+  }, [dish.selectedType]);
 
   function setActiveDish(isActive) {
     setModalActive(isActive);
@@ -56,16 +60,19 @@ const Menu = observer(() => {
           }
           <div className='list-of-dishes__cards-block'>
             {
-              dish.dishes.map((dish) =>
-                <CardOfTheDish
-                  key={dish.id}
-                  id={dish.id}
-                  name={dish.name}
-                  price={dish.price}
-                  image={dish.image}
-                  isOpen={setModalActive}
-                  setDishId={setCurrentDishId} />
-              )
+              dish.dishes.length !== 0 ?
+                dish.dishes.map((dish, id) =>
+                  <CardOfTheDish
+                    key={dish.id}
+                    id={id}
+                    name={dish.name}
+                    price={dish.price}
+                    image={dish.image}
+                    isOpen={setModalActive}
+                    setDishId={setCurrentDishId} />
+                )
+                :
+                <h1 className='list-of-dishes__cards-block__dishes-are-not-found'>Упс! Блюда не найдены!</h1>
             }
           </div>
         </div>
@@ -74,25 +81,31 @@ const Menu = observer(() => {
       <ModalWindow
         active={modalActive}
         setActive={setActiveDish}>
-        <div className='dish-modal'>
-          <div className='dish-modal__info'>
-            <h1 className='dish-modal__info__title'>{dish.dishes[currentDishId - 1].name}</h1>
-            <div className='dish-modal__info__weight-and-description'>
-              <p className='dish-modal__info__weight'>Масса: {dish.dishes[currentDishId - 1].weight}гр</p>
-              <p className='dish-modal__info__description'>Описание: {dish.dishes[currentDishId - 1].description}</p>
-            </div>
-          </div>
-          <div className='dish-modal__image-and-price'>
-            <img className='dish-modal__image-and-price__image' src={'http://localhost:5050/' + dish.dishes[currentDishId - 1].image} alt={dish.dishes[currentDishId - 1].name}></img>
-            <p className='dish-modal__image-and-price__price'>Стоимость: {dish.dishes[currentDishId - 1].price} руб.</p>
-          </div>
-        </div>
-        <div className='dish-modal__buttons'>
-          <BucketButton
-            innerText={'Назад'} />
-          <BucketButton
-            innerText={'В корзину'} />
-        </div>
+        {
+          dish.dishes.length !== 0 ?
+            <>
+              <div className='dish-modal'>
+                <div className='dish-modal__info'>
+                  <h1 className='dish-modal__info__title'>{dish.dishes[currentDishId].name}</h1>
+                  <div className='dish-modal__info__weight-and-description'>
+                    <p className='dish-modal__info__description'>Описание: {dish.dishes[currentDishId].description}</p>
+                    <p className='dish-modal__info__weight'>Масса: {dish.dishes[currentDishId].weight}гр</p>
+                  </div>
+                </div>
+                <div className='dish-modal__image-and-price'>
+                  <img className='dish-modal__image-and-price__image' src={'http://localhost:5050/' + dish.dishes[currentDishId].image} alt={dish.dishes[currentDishId].name}></img>
+                  <p className='dish-modal__image-and-price__price'>Стоимость: {dish.dishes[currentDishId].price} руб.</p>
+                </div>
+              </div>
+              <div className='dish-modal__buttons'>
+                <BucketButton
+                  innerText={'Назад'} />
+                <BucketButton
+                  innerText={'В корзину'} />
+              </div>
+            </>
+            : null
+          }
       </ModalWindow>
       <AdminAddDishWindow
         active={addDishWindow}

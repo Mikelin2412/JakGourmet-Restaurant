@@ -108,14 +108,6 @@ button {
     line-height: normal;
 }
 
-.dish-modal__info__weight {
-    margin: 0;
-}
-
-.dish-modal__info__description {
-    margin: 0;
-}
-
 .dish-modal__image-and-price {
     display: flex;
     flex-direction: column;
@@ -143,4 +135,14 @@ button {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
+}
+
+.list-of-dishes__cards-block__dishes-are-not-found {
+    text-align: center;
+    color: #1D1D1D;
+    font-family: Roboto;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

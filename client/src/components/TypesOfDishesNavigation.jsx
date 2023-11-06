@@ -4,7 +4,6 @@ import { Context } from '..'
 
 const TypesOfDishesNavigation = observer(() => {
   const {dish} = useContext(Context);
-  console.log(dish.selectedType.id);
 
   return (
     <div className='types-of-dishes-navigation'>
