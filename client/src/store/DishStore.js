@@ -1,5 +1,4 @@
 import {makeAutoObservable} from 'mobx'
-import image from '../assets/images/Capture.png'
 
 export default class DishStore {
     constructor() {

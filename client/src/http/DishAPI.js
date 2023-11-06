@@ -10,8 +10,8 @@ export const getTypes = async () => {
     return data;
 }
 
-export const addDish = async (name, description, price, weight, dishTypeId) => {
-    const {data} = await $authHost.post('api/menu/', {name, description, price, weight, dishTypeId});
+export const addDish = async (dish) => {
+    const {data} = await $authHost.post('api/menu/', dish);
     return data;
 }
 
