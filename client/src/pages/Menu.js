@@ -43,7 +43,8 @@ const Menu = observer(() => {
           :
           <Header />
         }
-        <TypesOfDishesNavigation />
+        <TypesOfDishesNavigation
+          setDishId={setCurrentDishId}/>
         <div className='list-of-dishes'>
           {
             user.role === 'ADMIN' ?
