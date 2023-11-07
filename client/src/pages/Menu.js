@@ -49,7 +49,7 @@ const Menu = observer(() => {
           {
             user.role === 'ADMIN' ?
               <div className='list-of-dishes__admin-panel'>
-                <h1 className='list-of-dishes__title'>Закуски</h1>
+                <h1 className='list-of-dishes__title'>{!Object.keys(dish.selectedType).length ? 'Все блюда' : dish.selectedType.name}</h1>
                 <button
                   className='list-of-dishes__add-dish'
                   onClick={() => setAddDishWindow(true)}>Добавить блюдо</button>
