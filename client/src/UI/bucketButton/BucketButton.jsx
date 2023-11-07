@@ -11,6 +11,8 @@ const BucketButton = ({ innerText, handleFunction, id, dishCost, countOfDishes }
       handleFunction(true);
     } else if (innerText === 'Зарегистрироваться' || innerText === 'Войти') {
       handleFunction();
+    } else if (innerText === 'Назад') {
+      handleFunction(false);
     }
   }
 

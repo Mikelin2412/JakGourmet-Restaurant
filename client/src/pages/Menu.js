@@ -100,7 +100,8 @@ const Menu = observer(() => {
               </div>
               <div className='dish-modal__buttons'>
                 <BucketButton
-                  innerText={'Назад'} />
+                  innerText={'Назад'}
+                  handleFunction={setModalActive} />
                 <BucketButton
                   innerText={'В корзину'} />
               </div>
