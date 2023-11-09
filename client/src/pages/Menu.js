@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../components/Header'
 import CardOfTheDish from '../UI/cardOfTheDish/CardOfTheDish'
 import '../styles/Menu.css'
@@ -6,73 +6,115 @@ import TypesOfDishesNavigation from '../components/TypesOfDishesNavigation'
 import Footer from '../components/Footer'
 import { Context } from '..'
 import ModalWindow from '../UI/modalWindow/ModalWindow'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { MENU_ROUTE } from '../utils/consts'
 import BucketButton from '../UI/bucketButton/BucketButton'
+import AdminHeader from '../components/AdminHeader'
+import AdminAddDishWindow from '../components/AdminAddDishWindow'
+import { getAllDishes, getTypes } from '../http/DishAPI'
+import { observer } from 'mobx-react-lite'
 
-const Menu = () => {
-  const { dish } = useContext(Context);
+const Menu = observer(() => {
+  const { user, dish } = useContext(Context);
   const [modalActive, setModalActive] = useState(false);
+  const [addDishWindow, setAddDishWindow] = useState(false);
+  const [currentDishId, setCurrentDishId] = useState(0);
   const navigate = useNavigate();
-  const {id} = useParams();
 
-  function handleClose() {
+  useEffect(() => {
+    getTypes().then(data => dish.setTypes(data))
+    getAllDishes().then(data => dish.setDishes(data))
+  }, []);
+
+  useEffect(() => {
+    getAllDishes(dish.selectedType.id).then(data => dish.setDishes(data))
+  }, [dish.selectedType]);
+
+  function setActiveDish(isActive) {
+    setModalActive(isActive);
     navigate(MENU_ROUTE);
   }
-
 
   return (
     <>
       <div className='page'>
-        <Header />
-        <TypesOfDishesNavigation />
+        {user.role === 'ADMIN' ?
+          <AdminHeader />
+          :
+          <Header />
+        }
+        <TypesOfDishesNavigation
+          setDishId={setCurrentDishId}/>
         <div className='list-of-dishes'>
-          <h1 className='list-of-dishes__title'>Закуски</h1>
+          {
+            user.role === 'ADMIN' ?
+              <div className='list-of-dishes__admin-panel'>
+                <h1 className='list-of-dishes__title'>{!Object.keys(dish.selectedType).length ? 'Все блюда' : dish.selectedType.name}</h1>
+                <button
+                  className='list-of-dishes__add-dish'
+                  onClick={() => setAddDishWindow(true)}>Добавить блюдо</button>
+              </div>
+              :
+              <div className='list-of-dishes__admin-panel'>
+                <h1 className='list-of-dishes__title'>Закуски</h1>
+              </div>
+          }
           <div className='list-of-dishes__cards-block'>
             {
-              dish.dishes.map((dish) =>
-                <CardOfTheDish
-                  key={dish.id}
-                  id={dish.id}
-                  name={dish.name}
-                  price={dish.price}
-                  image={dish.img}
-                  isOpen={setModalActive} />
-              )
+              dish.dishes.length !== 0 ?
+                dish.dishes.map((dish, id) =>
+                  <CardOfTheDish
+                    key={dish.id}
+                    id={id}
+                    name={dish.name}
+                    price={dish.price}
+                    image={dish.image}
+                    isOpen={setModalActive}
+                    setDishId={setCurrentDishId} />
+                )
+                :
+                <h1 className='list-of-dishes__cards-block__dishes-are-not-found'>Упс! Блюда не найдены!</h1>
             }
           </div>
         </div>
       </div>
       <Footer />
-      {
-        (modalActive) ?
-          <ModalWindow
-            active={modalActive}
-            setActive={setModalActive}
-            handleClose={handleClose}>
-            <div className='dish-modal'>
-              <div className='dish-modal__info'>
-                <h1 className='dish-modal__info__title'>{dish.dishes[id - 1].name}</h1>
-                <div className='dish-modal__info__weight-and-description'>
-                  <p className='dish-modal__info__weight'>Масса: {dish.dishes[id - 1].weight}гр</p>
-                  <p className='dish-modal__info__description'>Описание: {dish.dishes[id - 1].description}</p>
+      <ModalWindow
+        active={modalActive}
+        setActive={setActiveDish}>
+        {
+          dish.dishes.length !== 0 ?
+            <>
+              <div className='dish-modal'>
+                <div className='dish-modal__info'>
+                  <h1 className='dish-modal__info__title'>{dish.dishes[currentDishId].name}</h1>
+                  <div className='dish-modal__info__weight-and-description'>
+                    <p className='dish-modal__info__description'>Описание: {dish.dishes[currentDishId].description}</p>
+                    <p className='dish-modal__info__weight'>Масса: {dish.dishes[currentDishId].weight}гр</p>
+                  </div>
+                </div>
+                <div className='dish-modal__image-and-price'>
+                  <img className='dish-modal__image-and-price__image' src={'http://localhost:5050/' + dish.dishes[currentDishId].image} alt={dish.dishes[currentDishId].name}></img>
+                  <p className='dish-modal__image-and-price__price'>Стоимость: {dish.dishes[currentDishId].price} руб.</p>
                 </div>
               </div>
-              <div className='dish-modal__image-and-price'>
-                <img className='dish-modal__image-and-price__image' src={dish.dishes[id - 1].img} alt={dish.dishes[id - 1].name}></img>
-                <p className='dish-modal__image-and-price__price'>Стоимость: {dish.dishes[id - 1].price} руб.</p>
+              <div className='dish-modal__buttons'>
+                <BucketButton
+                  innerText={'Назад'}
+                  handleFunction={setModalActive} />
+                <BucketButton
+                  innerText={'В корзину'} />
               </div>
-            </div>
-            <div className='dish-modal__buttons'>
-              <BucketButton
-                innerText={'Назад'}/>
-              <BucketButton
-                innerText={'В корзину'} />
-            </div>
-          </ModalWindow> : null
-      }
+            </>
+            : null
+          }
+      </ModalWindow>
+      <AdminAddDishWindow
+        active={addDishWindow}
+        setActive={setAddDishWindow}>
+      </AdminAddDishWindow>
     </>
   )
-}
+})
 
 export default Menu

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../components/Header';
 import Button from '../UI/button/Button';
 import MainSectionCards from '../UI/mainSectionCard/MainSectionCards';
@@ -6,8 +6,13 @@ import images from '../assets/images/images.png';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import ClientsReviews from '../components/ClientsReviews';
+import { observer } from 'mobx-react-lite';
+import { Context } from '..';
+import AdminHeader from '../components/AdminHeader';
 
-const MainPage = () => {
+const MainPage = observer(() => {
+    const {user} = useContext(Context);
+
     const mainSectionCardsInfo = [
         {
             title: 'Магическая Атмосфера',
@@ -26,7 +31,11 @@ const MainPage = () => {
     return (
         <>
             <div className='main-section'>
-                <Header />
+                {user.role === 'ADMIN' ?
+                    <AdminHeader />
+                    :
+                    <Header />
+                }
                 <div className='main-section__view-menu-block'>
                     <div className='main-section__text'>
                         <h2>Добро пожаловать в</h2>
@@ -88,6 +97,6 @@ const MainPage = () => {
             <Footer />
         </>
     );
-}
+})
 
 export default MainPage;
