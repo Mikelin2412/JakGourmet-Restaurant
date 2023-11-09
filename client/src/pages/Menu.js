@@ -32,7 +32,7 @@ const Menu = observer(() => {
 
   function setActiveDish(isActive) {
     setModalActive(isActive);
-    navigate(MENU_ROUTE);
+    navigate(-1);
   }
 
   return (
@@ -56,7 +56,7 @@ const Menu = observer(() => {
               </div>
               :
               <div className='list-of-dishes__admin-panel'>
-                <h1 className='list-of-dishes__title'>Закуски</h1>
+                <h1 className='list-of-dishes__title'>{!Object.keys(dish.selectedType).length ? 'Все блюда' : dish.selectedType.name}</h1>
               </div>
           }
           <div className='list-of-dishes__cards-block'>

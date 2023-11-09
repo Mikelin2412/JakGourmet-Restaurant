@@ -38,11 +38,21 @@ const DishType = sequelize.define('dish-type', {
     timestamps: false,
 });
 
+const Feedbacks = sequelize.define('feedbacks', {
+    feedback: {type: DataTypes.STRING, allowNull: false},
+},
+{
+    timestamps: false,
+});
+
 User.hasOne(UserRoles, { foreignKey: 'id' });
 UserRoles.belongsTo(User, { foreignKey: 'id' });
 
 DishType.hasMany(Dish);
 Dish.belongsTo(DishType);
+
+User.hasOne(Feedbacks, { foreignKey: 'id' });
+Feedbacks.belongsTo(User, { foreignKey: 'id' });
 
 module.exports = {
     User,
