@@ -58,5 +58,6 @@ module.exports = {
     User,
     UserRoles,
     Dish,
-    DishType
+    DishType,
+    Feedbacks
 }
