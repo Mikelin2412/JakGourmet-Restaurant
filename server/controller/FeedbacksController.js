@@ -7,6 +7,10 @@ class FeedbacksController {
         if (!id || !feedback) {
             return next(ApiError.badRequest('Некорректные данные!'));
         }
+        const isFeedback = await Feedbacks.findOne({where: {id}});
+        if (isFeedback) {
+            return next(ApiError.badRequest('Пользователь с таким id уже оставлял отзыв!'));
+        }
         const Feedback = await Feedbacks.create({id, feedback});
         return res.json(Feedback);
     }
