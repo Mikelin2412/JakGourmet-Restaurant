@@ -2,6 +2,7 @@ import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import DishStore from './store/DishStore';
+import FeedbackStore from './store/FeedbackStore';
 import OrderStore from './store/OrderStore';
 import UserStore from './store/UserStore';
 
@@ -13,6 +14,7 @@ root.render(
     user: new UserStore(),
     dish: new DishStore(),
     orders: new OrderStore(),
+    feedbacks: new FeedbackStore()
   }}>
     <React.StrictMode>
       <App />
