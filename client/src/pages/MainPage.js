@@ -15,10 +15,11 @@ const MainPage = observer(() => {
     const {user, feedbacks} = useContext(Context);
 
     useEffect(() => {
-        getAllFeedbacks().then(data => {
-            feedbacks.setFeedbacks(data.allFeedbacks)
-            feedbacks.setUsersOfFeedbacks(data.users)
-        });
+        getAllFeedbacks()
+            .then(data => {
+                console.log(data)
+                feedbacks.setFeedbacks(data)
+            });
     }, []);
 
     const mainSectionCardsInfo = [

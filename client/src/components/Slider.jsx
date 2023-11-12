@@ -25,12 +25,12 @@ const Slider = observer(() => {
             modules={[Pagination, Navigation]}
             className="mySwiper">
             {
-                feedbacks.allFeedbacks.map((feedbackElem, index) => <SwiperSlide key={feedbackElem.id}>
+                feedbacks.allFeedbacks.map(feedbackElem => <SwiperSlide key={feedbackElem.feedback.id}>
                         <div className='clients-reviews-section__content'>
-                            <p className='clients-reviews-section__content__review'>{feedbackElem.feedback}</p>
+                            <p className='clients-reviews-section__content__review'>{feedbackElem.feedback.feedback}</p>
                             <img className='clients-reviews-section__content__profile-icon' src={icon} alt='profile icon' />
                             <h4 className='clients-reviews-section__content__visitor'>Посетитель</h4>
-                            <span className='clients-reviews-section__content__visitor-name'>{feedbacks.usersOfFeedbacks[index].name}</span>
+                            <span className='clients-reviews-section__content__visitor-name'>{feedbackElem.user.name}</span>
                         </div>
                     </SwiperSlide>
                 )

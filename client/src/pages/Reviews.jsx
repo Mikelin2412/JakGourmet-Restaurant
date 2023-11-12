@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import background from '../assets/images/restaurant-background.jpg'
 import BucketButton from '../UI/bucketButton/BucketButton'
 import '../styles/Reviews.css';
+import { Context } from '..'
+import { addFeedback } from '../http/FeedbacksAPI'
 
 const Reviews = () => {
+    const {user} = useContext(Context);
+    const [feedback, setFeedback] = useState('');
+
+    const sendFeedback = () => {
+        addFeedback(user.user.id, feedback)
+            .catch(err => alert(err.response.data.message))
+    }
+
     return (
         <>
             <div className='page'>
@@ -15,10 +25,17 @@ const Reviews = () => {
                     <div className='review__form'>
                         <h1 className='review__form__title'>Обратная связь</h1>
                         <div className='review__form__body'>
-                            <textarea className='review__form__body__textarea' cols={50} placeholder={'Напишите здесь ваш отзыв'}></textarea>
+                            <textarea
+                                className='review__form__body__textarea'
+                                cols={50}
+                                placeholder={'Напишите здесь ваш отзыв'}
+                                value={feedback}
+                                onChange={(e) => setFeedback(e.target.value)}></textarea>
                             <div className='review__form__body__info'>
                                 <p className='review__form__body__info__text'>Здесь вы можете оставлять свои предложения и пожелания, а также оценить обслуживание в нашем заведении</p>
-                                <BucketButton innerText={'Отправить'}/>
+                                <BucketButton
+                                    innerText={'Отправить'}
+                                    handleFunction={sendFeedback}/>
                             </div>
                         </div>
                     </div>

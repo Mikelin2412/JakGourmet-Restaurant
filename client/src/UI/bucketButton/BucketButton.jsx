@@ -13,6 +13,8 @@ const BucketButton = ({ innerText, handleFunction, id, dishCost, countOfDishes }
       handleFunction();
     } else if (innerText === 'Назад') {
       handleFunction(false);
+    } else if (innerText === 'Отправить') {
+      handleFunction();
     }
   }
 

@@ -23,10 +23,17 @@ class FeedbacksController {
                 id: userIds
             }
         });
+        // const sortedFeedbacks = allFeedbacks.map(feedback => {
+        //     const user = users.find(user => user.id === feedback.id);
+        //     return {
+        //         feedback,
+        //         user
+        //     }
+        // });
         if (!allFeedbacks || !users) {
             return next(ApiError.badRequest('Данные не найдены!'));
         }
-        return res.json({users, allFeedbacks});
+        return res.json(sortedFeedbacks);
     }
 }
 
