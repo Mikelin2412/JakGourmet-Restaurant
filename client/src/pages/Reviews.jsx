@@ -6,13 +6,17 @@ import BucketButton from '../UI/bucketButton/BucketButton'
 import '../styles/Reviews.css';
 import { Context } from '..'
 import { addFeedback } from '../http/FeedbacksAPI'
+import { useNavigate } from 'react-router-dom'
+import { MAIN_PAGE_ROUTE } from '../utils/consts'
 
 const Reviews = () => {
     const {user} = useContext(Context);
+    const navigation = useNavigate();
     const [feedback, setFeedback] = useState('');
 
     const sendFeedback = () => {
         addFeedback(user.user.id, feedback)
+            .then(data => navigation(MAIN_PAGE_ROUTE))
             .catch(err => alert(err.response.data.message))
     }
 

@@ -17,7 +17,6 @@ const MainPage = observer(() => {
     useEffect(() => {
         getAllFeedbacks()
             .then(data => {
-                console.log(data)
                 feedbacks.setFeedbacks(data)
             });
     }, []);
