@@ -15,9 +15,15 @@ const ReservationPopup = ({active, setActive}) => {
                     <input id='time' type='time'></input>
                     <label id='tel'>Телефон: </label>
                     <input id='tel' type='tel'></input>
-                    {/*количество гостей переделать на выбор свободного столик с помощью option*/}
-                    <label id='guest-count'>Количество гостей: </label>
-                    <input id='guest-count' type='number'></input>
+                    <label id='guest-count'>Номер столика: </label>
+                    <select id='guest-count'>
+                        <option>1 столик</option>
+                        <option>2 столик</option>
+                        <option>3 столик</option>
+                        <option>4 столик</option>
+                        <option>5 столик</option>
+                        <option>6 столик</option>
+                    </select>
                 </div>
             </form>
         </ModalWindow>

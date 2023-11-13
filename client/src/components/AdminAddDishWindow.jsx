@@ -20,7 +20,8 @@ const AdminAddDishWindow = ({active, setActive}) => {
     formData.append('weight', `${weight}`);
     formData.append('img', image);
     formData.append('dishTypeId', `${type}`);
-    addDish(formData).then(data => window.location.reload());
+    addDish(formData)
+      .then(data => window.location.reload());
   }
 
   const addImage = (e) => {

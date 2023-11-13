@@ -45,6 +45,25 @@ const Feedbacks = sequelize.define('feedbacks', {
     timestamps: false,
 });
 
+const Reservation = sequelize.define('reservation', {
+    dateOfCreation: {type: DataTypes.DATE, allowNull: false},
+    dateOfReservation: {type: DataTypes.DATE, allowNull: false},
+    timeOfReservation: {type: DataTypes.TIME, allowNull: false},
+    status: {type: DataTypes.STRING, allowNull: false},
+    telephone: {type: DataTypes.STRING, unique: true, allowNull: false},
+    numberOfTable: {type: DataTypes.INTEGER, allowNull: false}
+},
+{
+    timestamps: false,
+});
+
+const Table = sequelize.define('table', {
+    numberOfSeats: {type: DataTypes.INTEGER, allowNull: false}
+},
+{
+    timestamps: false,
+});
+
 User.hasOne(UserRoles, { foreignKey: 'id' });
 UserRoles.belongsTo(User, { foreignKey: 'id' });
 
@@ -54,10 +73,18 @@ Dish.belongsTo(DishType);
 User.hasOne(Feedbacks, { foreignKey: 'id' });
 Feedbacks.belongsTo(User, { foreignKey: 'id' });
 
+User.hasMany(Reservation, { foreignKey: 'id' });
+Reservation.belongsTo(User, { foreignKey: 'id' });
+
+Table.hasOne(Reservation, { foreignKey: 'numberOfTable' });
+Reservation.belongsTo(Table, { foreignKey: 'id' });
+
 module.exports = {
     User,
     UserRoles,
     Dish,
     DishType,
-    Feedbacks
+    Feedbacks,
+    Reservation,
+    Table
 }
