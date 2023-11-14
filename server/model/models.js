@@ -46,18 +46,20 @@ const Feedbacks = sequelize.define('feedbacks', {
 });
 
 const Reservation = sequelize.define('reservation', {
-    dateOfCreation: {type: DataTypes.DATE, allowNull: false},
-    dateOfReservation: {type: DataTypes.DATE, allowNull: false},
+    dateOfCreation: {type: DataTypes.DATEONLY, allowNull: false},
+    dateOfReservation: {type: DataTypes.DATEONLY, allowNull: false},
     timeOfReservation: {type: DataTypes.TIME, allowNull: false},
     status: {type: DataTypes.STRING, allowNull: false},
-    telephone: {type: DataTypes.STRING, unique: true, allowNull: false},
-    numberOfTable: {type: DataTypes.INTEGER, allowNull: false}
+    telephone: {type: DataTypes.STRING, allowNull: false},
+    numberOfTable: {type: DataTypes.INTEGER, allowNull: false},
+    userId: {type: DataTypes.INTEGER, allowNull: false}
 },
 {
     timestamps: false,
 });
 
 const Table = sequelize.define('table', {
+    numberOfTable: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
     numberOfSeats: {type: DataTypes.INTEGER, allowNull: false}
 },
 {
@@ -73,11 +75,11 @@ Dish.belongsTo(DishType);
 User.hasOne(Feedbacks, { foreignKey: 'id' });
 Feedbacks.belongsTo(User, { foreignKey: 'id' });
 
-User.hasMany(Reservation, { foreignKey: 'id' });
-Reservation.belongsTo(User, { foreignKey: 'id' });
+User.hasMany(Reservation);
+Reservation.belongsTo(User);
 
-Table.hasOne(Reservation, { foreignKey: 'numberOfTable' });
-Reservation.belongsTo(Table, { foreignKey: 'id' });
+Table.hasMany(Reservation, { foreignKey: 'numberOfTable' });
+Reservation.belongsTo(Table, { foreignKey: 'numberOfTable' });
 
 module.exports = {
     User,

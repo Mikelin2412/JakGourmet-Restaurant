@@ -5,5 +5,6 @@ const router = new Router();
 router.post('/add', ReservationController.addReservation);
 router.get('/getAll', ReservationController.getAllReservations);
 router.get('/get/:id', ReservationController.getDefiniteReservation);
+router.delete('/:id', ReservationController.deleteReservation);
 
 module.exports = router;

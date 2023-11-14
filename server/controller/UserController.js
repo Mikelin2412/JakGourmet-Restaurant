@@ -31,10 +31,10 @@ class UserController {
     async login(req, res, next) {
         const {email, password} = req.body;
         const user = await User.findOne({where: {email}});
-        const role = await UserRoles.findOne({where: user.id});
         if (!user) {
             return next(ApiError.badRequest('Пользователь не найден!'));
         }
+        const role = await UserRoles.findOne({where: user.id});
         const comparePassword = bcrypt.compareSync(password, user.password);
         if (!comparePassword) {
             return next(ApiError.badRequest('Указан неверный пароль!'));
