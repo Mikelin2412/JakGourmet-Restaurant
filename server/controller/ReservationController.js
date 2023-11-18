@@ -35,7 +35,20 @@ class ReservationController {
     async getAllReservations(req, res, next) {
         try {
             const allReservations = await Reservation.findAll();
-            return res.json(allReservations);
+            const userIds = allReservations.map(reservation => reservation.userId);
+            const user = await User.findAll({where:
+                {
+                    id: userIds
+                }
+            });
+            const allSortedReservations = allReservations.map(reservation => {
+                const {name} = user.find(user => user.id === reservation.userId);
+                return {
+                    name,
+                    reservation
+                }
+            });
+            return res.json(allSortedReservations);
         } catch(error) {
             return next(ApiError.internal('Произошла ошибка при получении всех бронирований!'));
         }
