@@ -18,3 +18,8 @@ export const getAllOrders = async () => {
     const {data} = await $authHost.get('api/reservation/getAll');
     return data;
 }
+
+export const getDefiniteReservations = async (id) => {
+    const {data} = await $authHost.get('api/reservation/getDefinite', {params: {id}});
+    return data;
+}

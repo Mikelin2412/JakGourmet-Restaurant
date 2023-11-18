@@ -55,10 +55,17 @@ class ReservationController {
     }
 
     async getDefiniteReservation(req, res, next) {
-        const {id} = req.params;
+        const {id} = req.query;
         try {
             const reservations = await Reservation.findAll({where: {userId: id}});
-            return res.json(reservations);
+            const {name} = await User.findOne({where: {id: id}});
+            const finalReservations = reservations.map(reservation => {
+                return {
+                    name,
+                    reservation
+                }
+            });
+            return res.json(finalReservations);
         } catch(error) {
             return next(ApiError.internal('Произошла ошибка при получении бронирований!'));
         }
