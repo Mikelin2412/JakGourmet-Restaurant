@@ -17,8 +17,6 @@ const Orders = observer(() => {
       .catch(err => alert(err))
   }, []);
 
-  console.log(orders.orders)
-
   return (
     <div>
       <div className='page'>

@@ -35,9 +35,15 @@
 
 .modal__reservation__fields-block {
     margin-top: 10px;
+    margin-bottom: 20px;
     padding-top: 10px;
     display: flex;
     flex-direction: column;
     width: 100%;
     border-top: 1px solid #000;
+}
+
+.modal__reservation__buttons {
+    display: flex;
+    justify-content: space-between;
 }

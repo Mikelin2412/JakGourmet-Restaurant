@@ -15,6 +15,8 @@ const BucketButton = ({ innerText, handleFunction, id, dishCost, countOfDishes }
       handleFunction(false);
     } else if (innerText === 'Отправить') {
       handleFunction();
+    } else if (innerText === 'Забронировать') {
+      handleFunction();
     }
   }
 
