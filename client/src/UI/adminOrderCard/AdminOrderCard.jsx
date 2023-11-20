@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import AdminOrderCardButton from '../adminOrderCardButton/AdminOrderCardButton';
+import { updateReservation } from '../../http/OrdersAPI';
 import classes from './adminOrderCard.module.css';
+import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
 
-const AdminOrderCard = ({ order }) => {
+const AdminOrderCard = observer(({ order }) => {
+  const { user, orders } = useContext(Context);
+  const updateCurrentReservation = (id, status) => {
+    updateReservation(id, status)
+      .then(data => {
+        const index = orders.orders.findIndex((order) => order.reservation.id === data.reservation.id);
+        if (index !== -1) {
+          const updatedOrders = [...orders.orders];
+          updatedOrders[index] = data;
+          orders.setOrders(updatedOrders);
+        }
+      })
+      .catch(err => {
+        console.log('Произошла ошибка при обновлении статуса бронирования: ' + err)
+      })
+  }
+
   return (
     <div className={classes.adminOrderCard}>
       <h1 className={classes.adminOrderCardTitle}>Заказ №{order.reservation.id}</h1>
@@ -15,12 +34,25 @@ const AdminOrderCard = ({ order }) => {
         <p>Телефон: {order.reservation.telephone}</p>
         <p>Номер столика: {order.reservation.numberOfTable}</p>
       </div>
-      <div className={classes.adminOrderCardButtons}>
-        <AdminOrderCardButton type='reject'>Отклонить</AdminOrderCardButton>
-        <AdminOrderCardButton type='approve'>Одобрить</AdminOrderCardButton>
-      </div>
+      {
+        user.role === 'ADMIN' ?
+          <div className={classes.adminOrderCardButtons}>
+            <AdminOrderCardButton
+              type='reject'
+              handleFunction={() => updateCurrentReservation(order.reservation.id, 'Отклонено')}>Отклонить</AdminOrderCardButton>
+            <AdminOrderCardButton
+              type='approve'
+              handleFunction={() => updateCurrentReservation(order.reservation.id, 'Одобрено')}>Одобрить</AdminOrderCardButton>
+          </div>
+          :
+          <div className={classes.adminOrderCardButtons}>
+            <AdminOrderCardButton
+              type='reject'
+              handleFunction={() => updateCurrentReservation(order.reservation.id, 'Бронирование отменено')}>Отменить бронирование</AdminOrderCardButton>
+          </div>
+      }
     </div>
   )
-}
+})
 
 export default AdminOrderCard

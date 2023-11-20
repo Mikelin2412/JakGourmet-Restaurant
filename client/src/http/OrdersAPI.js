@@ -23,3 +23,11 @@ export const getDefiniteReservations = async (id) => {
     const {data} = await $authHost.get('api/reservation/getDefinite', {params: {id}});
     return data;
 }
+
+export const updateReservation = async (id, status) => {
+    const {data} = await $authHost.patch(`api/reservation/update/${id}`, 
+    {
+        status,
+    });
+    return data;
+}

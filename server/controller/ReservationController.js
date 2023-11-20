@@ -71,6 +71,27 @@ class ReservationController {
         }
     }
 
+    async updateReservation(req, res, next) {
+        const reservationId = req.params.id;
+        const {status} = req.body;
+        try {
+            await Reservation.update(
+                {
+                    status: status
+                },
+                {
+                    where: {id: reservationId}
+            });
+            const updatedReservation = await Reservation.findOne({
+                where: {id: reservationId}
+            });
+            const {name} = await User.findOne({where: {id: updatedReservation.userId}})
+            return res.json({name, reservation: updatedReservation});
+        } catch (err) {
+            return next(ApiError.internal('Произошла ошибка при обновлении статуса бронирования!'));
+        }
+    }
+
     async deleteReservation(req, res, next) {
         const {id} = req.params;
         try {
