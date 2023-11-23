@@ -66,6 +66,21 @@ const Table = sequelize.define('table', {
     timestamps: false,
 });
 
+const Basket = sequelize.define('basket', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+    totalPrice: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0}
+},
+{
+    timestamps: false,
+});
+
+const BasketDish = sequelize.define('basket-dish', {
+    count: {type: DataTypes.INTEGER, allowNull: false}
+},
+{
+    timestamps: false,
+});
+
 User.hasOne(UserRoles, { foreignKey: 'id' });
 UserRoles.belongsTo(User, { foreignKey: 'id' });
 
@@ -81,6 +96,15 @@ Reservation.belongsTo(User);
 Table.hasMany(Reservation, { foreignKey: 'numberOfTable' });
 Reservation.belongsTo(Table, { foreignKey: 'numberOfTable' });
 
+User.hasOne(Basket, { foreignKey: 'userId'});
+Basket.belongsTo(User, { foreignKey: 'userId'});
+
+Basket.hasMany(BasketDish, { foreignKey: 'basketId' });
+BasketDish.belongsTo(Basket, { foreignKey: 'basketId' });
+
+Dish.hasOne(BasketDish, { foreignKey: 'dishId' });
+BasketDish.belongsTo(Dish, { foreignKey: 'dishId' });
+
 module.exports = {
     User,
     UserRoles,
@@ -88,5 +112,7 @@ module.exports = {
     DishType,
     Feedbacks,
     Reservation,
-    Table
+    Table,
+    Basket,
+    BasketDish
 }
