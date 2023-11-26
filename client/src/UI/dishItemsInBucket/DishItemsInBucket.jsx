@@ -1,39 +1,32 @@
-import React, { useContext } from 'react'
-import { DishContext } from '../../pages/Bucket'
+import React from 'react'
+import { deleteDefiniteDishFromBasket } from '../../http/BasketAPI'
 import BucketButton from '../bucketButton/BucketButton'
 import Counter from '../counter/Counter'
 import classes from './dishItemsInBucket.module.css'
 
-const DishItemsInBucket = () => {
-  const {listOfDishes, handleChangeCountOfDishes, totalCost, handleDeleteOfTheDish} = useContext(DishContext);
+const DishItemsInBucket = ({dishItem}) => {
+  const handleDeleteOfTheDish = () => {
+    console.log(dishItem.basketId)
+    console.log(dishItem.dishId)
+    deleteDefiniteDishFromBasket(dishItem.basketId, dishItem.dishId)
+      .then(data => console.log(data))
+      .catch(err => alert(err))
+  }
 
   return (
-    <>
-      {listOfDishes.map((elem, index) => {
-        return (
-          <div key={index} className={classes.dishItem}>
-            <div className={classes.dishItemBlock}>
-              <div className={classes.dishInfo}>
-                <h4 className={classes.dishName}>{elem.dishName}</h4>
-                <p className={classes.dishCost}>{elem.dishCost * elem.numberOfServings} руб.</p>
-              </div>
-              <BucketButton
-                handleFunction={handleDeleteOfTheDish}
-                dishCost={elem.dishCost}
-                countOfDishes={elem.numberOfServings}
-                id={index}
-                innerText={'Удалить'} />
-            </div>
-            <Counter
-              totalCost={totalCost}
-              dishCost={elem.dishCost}
-              countOfDishes={elem.numberOfServings}
-              handleClick={handleChangeCountOfDishes}
-              id={index}/>
-          </div>
-        )
-      })}
-    </>
+    <div className={classes.dishItem}>
+      <div className={classes.dishItemBlock}>
+        <div className={classes.dishInfo}>
+          <h4 className={classes.dishName}>{dishItem.dish.name}</h4>
+          <p className={classes.dishCost}>{dishItem.dish.price * dishItem.count} руб.</p>
+        </div>
+        <BucketButton
+          handleFunction={handleDeleteOfTheDish}
+          innerText={'Удалить'} />
+      </div>
+      <Counter
+        countOfDishes={dishItem.count} />
+    </div>
   )
 }
 

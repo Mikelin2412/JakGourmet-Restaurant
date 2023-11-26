@@ -35,7 +35,7 @@ class BucketController {
         
             const allDishes = await BasketDish.findAll({ where: { basketId }, include: [Dish] });
         
-            return res.json({allDishes, basketTotalPrice});
+            return res.json({basketId, allDishes, basketTotalPrice});
           } catch (error) {
             return next(ApiError.internal('Произошла ошибка при получении блюд из корзины!'));
           }

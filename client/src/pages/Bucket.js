@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Header from '../components/Header'
 import DishItemsInBucket from '../UI/dishItemsInBucket/DishItemsInBucket'
 import '../styles/Bucket.css'
@@ -8,11 +8,10 @@ import ReservationPopup from '../components/ReservationPopup'
 import { observer } from 'mobx-react-lite'
 import { Context } from '..'
 import AdminHeader from '../components/AdminHeader'
-
-export const DishContext = createContext({});
+import { deleteAllDishesFromBasket, getAllDishesFromBasket } from '../http/BasketAPI'
 
 const Bucket = observer(() => {
-  const { user } = useContext(Context);
+  const { user, basket } = useContext(Context);
   const [listOfDishes, setListOfDishes] = useState([
     {
       dishName: 'Вегамикс',
@@ -33,6 +32,16 @@ const Bucket = observer(() => {
       numberOfServings: 1,
     }
   ]);
+
+  useEffect(() => {
+    getAllDishesFromBasket(user.user.id)
+      .then(data => {
+        basket.setBasketId(data.basketId);
+        basket.setDishesInBasket(data.allDishes);
+        basket.setTotalPrice(data.basketTotalPrice);
+      })
+      .catch(err => alert(err))
+  }, []);
 
   const [totalCost, setTotalCost] = useState(60);
 
@@ -62,12 +71,12 @@ const Bucket = observer(() => {
   }
 
   const handleDeleteAllDishes = () => {
-    setListOfDishes(() => [])
-    setTotalCost(() => 0)
+    deleteAllDishesFromBasket(basket.basketId)
+      .then(data => console.log(data))
+      .catch(err => alert(err))
   }
 
   return (
-    <DishContext.Provider value={{ listOfDishes, handleChangeCountOfDishes, totalCost, handleDeleteOfTheDish }}>
       <div>
         <div className='page'>
           {user.role === 'ADMIN' ?
@@ -77,9 +86,15 @@ const Bucket = observer(() => {
           }
           <div className='bucket-list'>
             <h1 className='bucket-list__main-text'>Корзина</h1>
-            <DishItemsInBucket />
+            {
+              basket.dishesInBasket.map((item, index) => 
+                <DishItemsInBucket
+                  key={index}
+                  dishItem={item}/>
+              )
+            }
             <div className='bucket-list__total-cost-block'>
-              <h1 className='bucket-list__main-text'>Итого: {totalCost} руб.</h1>
+              <h1 className='bucket-list__main-text'>Итого: {basket.totalPrice} руб.</h1>
               <div className='bucket-list__total-cost-block__buttons'>
                 <BucketButton
                   handleFunction={handleDeleteAllDishes}
@@ -96,7 +111,6 @@ const Bucket = observer(() => {
           active={modalActive}
           setActive={setModalActive} />
       </div>
-    </DishContext.Provider>
   )
 })
 
