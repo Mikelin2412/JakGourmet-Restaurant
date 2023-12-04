@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './AdminOrderCardButton.module.css'
 
-const AdminOrderCardButton = ({ children, type }) => {
+const AdminOrderCardButton = ({ children, type, handleFunction }) => {
     let background;
     switch (type) {
         case 'reject':
@@ -13,7 +13,9 @@ const AdminOrderCardButton = ({ children, type }) => {
     }
 
     return (
-        <button className={classes.adminOrderCardButton} style={{backgroundColor: background}}>
+        <button
+            className={classes.adminOrderCardButton} style={{backgroundColor: background}}
+            onClick={handleFunction}>
             {children}
         </button>
     )

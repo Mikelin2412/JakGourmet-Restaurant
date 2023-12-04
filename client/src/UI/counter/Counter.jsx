@@ -1,21 +1,31 @@
 import {React, useState} from 'react'
+import { changeCountOfDishInBasket } from '../../http/BasketAPI';
 import classes from './counter.module.css'
 
-const Counter = ({totalCost, dishCost, countOfDishes, handleClick, id}) => {
-    const [value, setValue] = useState(countOfDishes);
+const Counter = ({ basketId, dishId, countOfDishes, changeCount, changeTotalPrice }) => {
+    const [dishCount, setDishCount] = useState(countOfDishes);
 
-    const increase = () => {
-        setValue(value + 1);
-        handleClick(value + 1, id, totalCost + dishCost);
+    const increaseCount = (count) => {
+        changeCountOfDishInBasket(basketId, dishId, count)
+            .then(data => {
+                setDishCount(count);
+                changeCount(count);
+                changeTotalPrice(true, count);
+            })
+            .catch(err => alert(err))
     }
 
-    const decrease = () => {
-        if (value - 1 === 0) {
-            setValue(() => 1);
-        }
-        else {
-            setValue(() => value - 1);
-            handleClick(value - 1, id, totalCost - dishCost);
+    const decreaseCount = (count) => {
+        if (count >= 1) {
+            changeCountOfDishInBasket(basketId, dishId, count)
+            .then(data => {
+                setDishCount(count);
+                changeCount(count);
+                changeTotalPrice(false, count);
+            })
+            .catch(err => alert(err))
+        } else {
+            setDishCount(1);
         }
     }
 
@@ -24,19 +34,19 @@ const Counter = ({totalCost, dishCost, countOfDishes, handleClick, id}) => {
             <button
                 type='button'
                 className={classes.increaseButton}
-                onClick={increase}>+</button>
+                onClick={() => increaseCount(dishCount + 1)}>+</button>
             <div className={classes.counterInputBlock}>
                 <input 
                     className={classes.counterInput}
                     type='number'
                     min='1'
-                    value={value}
-                    onChange={() => {setValue(value)}}/>
+                    value={dishCount}
+                    onChange={() => setDishCount(dishCount)}/>
             </div>
             <button
                 type='button'
                 className={classes.decreaseButton}
-                onClick={decrease}>-</button>
+                onClick={() => decreaseCount(dishCount - 1)}>-</button>
         </div>
     )
 }

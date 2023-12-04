@@ -38,15 +38,81 @@ const DishType = sequelize.define('dish-type', {
     timestamps: false,
 });
 
+const Feedbacks = sequelize.define('feedbacks', {
+    feedback: {type: DataTypes.STRING, allowNull: false},
+},
+{
+    timestamps: false,
+});
+
+const Reservation = sequelize.define('reservation', {
+    dateOfCreation: {type: DataTypes.DATEONLY, allowNull: false},
+    dateOfReservation: {type: DataTypes.DATEONLY, allowNull: false},
+    timeOfReservation: {type: DataTypes.TIME, allowNull: false},
+    status: {type: DataTypes.STRING, allowNull: false},
+    telephone: {type: DataTypes.STRING, allowNull: false},
+    numberOfTable: {type: DataTypes.INTEGER, allowNull: false},
+    userId: {type: DataTypes.INTEGER, allowNull: false}
+},
+{
+    timestamps: false,
+});
+
+const Table = sequelize.define('table', {
+    numberOfTable: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+    numberOfSeats: {type: DataTypes.INTEGER, allowNull: false}
+},
+{
+    timestamps: false,
+});
+
+const Basket = sequelize.define('basket', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+    totalPrice: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0}
+},
+{
+    timestamps: false,
+});
+
+const BasketDish = sequelize.define('basket-dish', {
+    count: {type: DataTypes.INTEGER, allowNull: false}
+},
+{
+    timestamps: false,
+});
+
 User.hasOne(UserRoles, { foreignKey: 'id' });
 UserRoles.belongsTo(User, { foreignKey: 'id' });
 
 DishType.hasMany(Dish);
 Dish.belongsTo(DishType);
 
+User.hasOne(Feedbacks, { foreignKey: 'id' });
+Feedbacks.belongsTo(User, { foreignKey: 'id' });
+
+User.hasMany(Reservation);
+Reservation.belongsTo(User);
+
+Table.hasMany(Reservation, { foreignKey: 'numberOfTable' });
+Reservation.belongsTo(Table, { foreignKey: 'numberOfTable' });
+
+User.hasOne(Basket, { foreignKey: 'userId'});
+Basket.belongsTo(User, { foreignKey: 'userId'});
+
+Basket.hasMany(BasketDish, { foreignKey: 'basketId' });
+BasketDish.belongsTo(Basket, { foreignKey: 'basketId' });
+
+Dish.hasOne(BasketDish, { foreignKey: 'dishId' });
+BasketDish.belongsTo(Dish, { foreignKey: 'dishId' });
+
 module.exports = {
     User,
     UserRoles,
     Dish,
-    DishType
+    DishType,
+    Feedbacks,
+    Reservation,
+    Table,
+    Basket,
+    BasketDish
 }

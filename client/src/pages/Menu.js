@@ -13,6 +13,7 @@ import AdminHeader from '../components/AdminHeader'
 import AdminAddDishWindow from '../components/AdminAddDishWindow'
 import { getAllDishes, getTypes } from '../http/DishAPI'
 import { observer } from 'mobx-react-lite'
+import { addDishToTheBasket } from '../http/BasketAPI'
 
 const Menu = observer(() => {
   const { user, dish } = useContext(Context);
@@ -32,7 +33,15 @@ const Menu = observer(() => {
 
   function setActiveDish(isActive) {
     setModalActive(isActive);
-    navigate(MENU_ROUTE);
+    navigate(-1);
+  }
+
+  function handleAddDishToTheBasket(userId, dishId, count) {
+    addDishToTheBasket(userId, dishId, count)
+      .then(data => console.log(data))
+      .catch(err => alert(err))
+    setModalActive(false);
+    navigate(-1);
   }
 
   return (
@@ -56,7 +65,7 @@ const Menu = observer(() => {
               </div>
               :
               <div className='list-of-dishes__admin-panel'>
-                <h1 className='list-of-dishes__title'>Закуски</h1>
+                <h1 className='list-of-dishes__title'>{!Object.keys(dish.selectedType).length ? 'Все блюда' : dish.selectedType.name}</h1>
               </div>
           }
           <div className='list-of-dishes__cards-block'>
@@ -103,7 +112,8 @@ const Menu = observer(() => {
                   innerText={'Назад'}
                   handleFunction={setModalActive} />
                 <BucketButton
-                  innerText={'В корзину'} />
+                  innerText={'В корзину'}
+                  handleFunction={() => handleAddDishToTheBasket(user.user.id, dish.dishes[currentDishId].id, 1)}/>
               </div>
             </>
             : null

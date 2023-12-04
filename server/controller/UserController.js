@@ -22,7 +22,7 @@ class UserController {
         }
         const hashPassword = await bcrypt.hash(password, 3);
         const user = await User.create({name, email, password: hashPassword});
-        const role = await UserRoles.create({role: 'ADMIN'});
+        const role = await UserRoles.create({role: 'USER'});
         const token = generateToken(user.id, user.email, user.name, role.role);
 
         return res.json({token});
@@ -31,10 +31,10 @@ class UserController {
     async login(req, res, next) {
         const {email, password} = req.body;
         const user = await User.findOne({where: {email}});
-        const role = await UserRoles.findOne({where: user.id});
         if (!user) {
             return next(ApiError.badRequest('Пользователь не найден!'));
         }
+        const role = await UserRoles.findOne({where: user.id});
         const comparePassword = bcrypt.compareSync(password, user.password);
         if (!comparePassword) {
             return next(ApiError.badRequest('Указан неверный пароль!'));

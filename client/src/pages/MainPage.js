@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Header from '../components/Header';
 import Button from '../UI/button/Button';
 import MainSectionCards from '../UI/mainSectionCard/MainSectionCards';
@@ -9,9 +9,17 @@ import ClientsReviews from '../components/ClientsReviews';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import AdminHeader from '../components/AdminHeader';
+import { getAllFeedbacks } from '../http/FeedbacksAPI';
 
 const MainPage = observer(() => {
-    const {user} = useContext(Context);
+    const {user, feedbacks} = useContext(Context);
+
+    useEffect(() => {
+        getAllFeedbacks()
+            .then(data => {
+                feedbacks.setFeedbacks(data)
+            });
+    }, []);
 
     const mainSectionCardsInfo = [
         {

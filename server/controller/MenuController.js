@@ -22,7 +22,6 @@ class MenuController {
 
     async getAllDishes(req, res) {
         let {dishTypeId} = req.query;
-        console.log('DISH TYPE ID: ' + dishTypeId)
         let dishes;
         if (!dishTypeId) {
             dishes = await Dish.findAll();
