@@ -12,26 +12,6 @@ import { deleteAllDishesFromBasket, getAllDishesFromBasket } from '../http/Baske
 
 const Bucket = observer(() => {
   const { user, basket } = useContext(Context);
-  const [listOfDishes, setListOfDishes] = useState([
-    {
-      dishName: 'Вегамикс',
-      description: 'Вкусно и точка',
-      dishCost: 32,
-      numberOfServings: 1,
-    },
-    {
-      dishName: 'sdfdsf',
-      description: 'sdfdsf',
-      dishCost: 13,
-      numberOfServings: 1,
-    },
-    {
-      dishName: 'papapapa',
-      description: 'papapapa',
-      dishCost: 15,
-      numberOfServings: 1,
-    }
-  ]);
 
   useEffect(() => {
     getAllDishesFromBasket(user.user.id)
@@ -43,36 +23,14 @@ const Bucket = observer(() => {
       .catch(err => alert(err))
   }, []);
 
-  const [totalCost, setTotalCost] = useState(60);
-
   const [modalActive, setModalActive] = useState(false);
-
-  const handleChangeCountOfDishes = (value, index, finalCost) => {
-    setListOfDishes(() => {
-      return listOfDishes.map((elem, ind) => {
-        if (ind === index) {
-          elem.numberOfServings = value;
-        }
-        return elem;
-      });
-    });
-    setTotalCost(() => {
-      return finalCost;
-    });
-  }
-
-  const handleDeleteOfTheDish = (id, costOfTheDish) => {
-    setListOfDishes(() => {
-      return listOfDishes.filter((elem, index) => id !== index)
-    });
-    setTotalCost(() => {
-      return totalCost - costOfTheDish;
-    });
-  }
 
   const handleDeleteAllDishes = () => {
     deleteAllDishesFromBasket(basket.basketId)
-      .then(data => console.log(data))
+      .then(data => {
+        basket.setDishesInBasket([]);
+        basket.setTotalPrice(0);
+      })
       .catch(err => alert(err))
   }
 
@@ -98,10 +56,10 @@ const Bucket = observer(() => {
               <div className='bucket-list__total-cost-block__buttons'>
                 <BucketButton
                   handleFunction={handleDeleteAllDishes}
-                  innerText={'Очистить все'} />
+                  innerText={'Очистить все'}/>
                 <BucketButton
                   innerText={'Бронирование'}
-                  handleFunction={setModalActive} />
+                  handleFunction={setModalActive}/>
               </div>
             </div>
           </div>
@@ -109,7 +67,7 @@ const Bucket = observer(() => {
         <Footer />
         <ReservationPopup
           active={modalActive}
-          setActive={setModalActive} />
+          setActive={setModalActive}/>
       </div>
   )
 })

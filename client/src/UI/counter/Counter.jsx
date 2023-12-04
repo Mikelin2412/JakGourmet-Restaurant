@@ -1,22 +1,52 @@
-import {React} from 'react'
+import {React, useState} from 'react'
+import { changeCountOfDishInBasket } from '../../http/BasketAPI';
 import classes from './counter.module.css'
 
-const Counter = ({ countOfDishes }) => {
+const Counter = ({ basketId, dishId, countOfDishes, changeCount, changeTotalPrice }) => {
+    const [dishCount, setDishCount] = useState(countOfDishes);
+
+    const increaseCount = (count) => {
+        changeCountOfDishInBasket(basketId, dishId, count)
+            .then(data => {
+                setDishCount(count);
+                changeCount(count);
+                changeTotalPrice(true, count);
+            })
+            .catch(err => alert(err))
+    }
+
+    const decreaseCount = (count) => {
+        if (count >= 1) {
+            changeCountOfDishInBasket(basketId, dishId, count)
+            .then(data => {
+                setDishCount(count);
+                changeCount(count);
+                changeTotalPrice(false, count);
+            })
+            .catch(err => alert(err))
+        } else {
+            setDishCount(1);
+        }
+    }
+
     return (
         <div className={classes.counter}>
             <button
                 type='button'
-                className={classes.increaseButton}>+</button>
+                className={classes.increaseButton}
+                onClick={() => increaseCount(dishCount + 1)}>+</button>
             <div className={classes.counterInputBlock}>
                 <input 
                     className={classes.counterInput}
                     type='number'
                     min='1'
-                    value={countOfDishes}/>
+                    value={dishCount}
+                    onChange={() => setDishCount(dishCount)}/>
             </div>
             <button
                 type='button'
-                className={classes.decreaseButton}>-</button>
+                className={classes.decreaseButton}
+                onClick={() => decreaseCount(dishCount - 1)}>-</button>
         </div>
     )
 }
