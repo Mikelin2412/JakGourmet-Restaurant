@@ -20,7 +20,7 @@ const ReservationPopup = ({active, setActive}) => {
         const month = currentDate.getMonth() + 1;
         const day = currentDate.getDate();
         const dateOfCreation = `${year}-${month}-${day}`;
-        const status = 'under consideration';
+        const status = 'на рассмотрении';
         addOrder(user.user.id, dateOfCreation, date, time, status, telephone, tableNumber)
             .then(data => {
                 console.log(data)
