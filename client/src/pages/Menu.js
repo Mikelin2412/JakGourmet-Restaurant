@@ -16,7 +16,7 @@ import { observer } from 'mobx-react-lite'
 import { addDishToTheBasket } from '../http/BasketAPI'
 
 const Menu = observer(() => {
-  const { user, dish } = useContext(Context);
+  const { user, dish, basket } = useContext(Context);
   const [modalActive, setModalActive] = useState(false);
   const [addDishWindow, setAddDishWindow] = useState(false);
   const [currentDishId, setCurrentDishId] = useState(0);
@@ -40,8 +40,18 @@ const Menu = observer(() => {
     addDishToTheBasket(userId, dishId, count)
       .then(data => console.log(data))
       .catch(err => alert(err))
+    // if (basket.dishesInBasket.length !== 0) {
+    //   let updateOneDishPosition = basket.dishesInBasket.map(dish => {
+    //     if (dish.dishId === dishId) {
+    //       dish.count += 1;
+    //     }
+    //     return dish;
+    //   });
+    //   basket.setDishesInBasket(updateOneDishPosition);
+    // }
     setModalActive(false);
     navigate(-1);
+    window.location.reload();
   }
 
   return (

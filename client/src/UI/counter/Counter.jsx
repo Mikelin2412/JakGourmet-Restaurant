@@ -9,7 +9,7 @@ const Counter = ({ basketId, dishId, countOfDishes, changeCount, changeTotalPric
         changeCountOfDishInBasket(basketId, dishId, count)
             .then(data => {
                 setDishCount(count);
-                changeCount(count);
+                changeCount(count, dishId);
                 changeTotalPrice(true, count);
             })
             .catch(err => alert(err))
@@ -20,7 +20,7 @@ const Counter = ({ basketId, dishId, countOfDishes, changeCount, changeTotalPric
             changeCountOfDishInBasket(basketId, dishId, count)
             .then(data => {
                 setDishCount(count);
-                changeCount(count);
+                changeCount(count, dishId);
                 changeTotalPrice(false, count);
             })
             .catch(err => alert(err))
