@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../..'
 import { deleteDefiniteDishFromBasket } from '../../http/BasketAPI'
 import BucketButton from '../bucketButton/BucketButton'
@@ -6,9 +6,12 @@ import Counter from '../counter/Counter'
 import classes from './dishItemsInBucket.module.css'
 
 const DishItemsInBucket = ({dishItem}) => {
-  const [dishPrice, setDishPrice] = useState(dishItem.dish.price * dishItem.count);
   const [dishCounter, setDishCounter] = useState(dishItem.count);
   const {basket} = useContext(Context);
+
+  useEffect(() => {
+    setDishCounter(dishItem.count)
+  }, [dishItem.count]);
 
   const handleDeleteOfTheDish = () => {
     deleteDefiniteDishFromBasket(dishItem.basketId, dishItem.dishId)
@@ -28,10 +31,9 @@ const DishItemsInBucket = ({dishItem}) => {
       return dish;
     })
     basket.setDishesInBasket(updatedCounterOfDishes);
-    setDishPrice(dishItem.dish.price * counter);
   }
 
-  const changeTotalPrice = (isIncrement, count) => {
+  const changeTotalPrice = (isIncrement) => {
     let changingDishPrice = isIncrement ? dishItem.dish.price : -dishItem.dish.price;
     basket.setTotalPrice(basket.totalPrice + changingDishPrice);
   }
@@ -41,7 +43,7 @@ const DishItemsInBucket = ({dishItem}) => {
       <div className={classes.dishItemBlock}>
         <div className={classes.dishInfo}>
           <h4 className={classes.dishName}>{dishItem.dish.name}</h4>
-          <p className={classes.dishCost}>{dishPrice} руб.</p>
+          <p className={classes.dishCost}>{dishItem.dish.price*dishItem.count} руб.</p>
         </div>
         <BucketButton
           handleFunction={handleDeleteOfTheDish}
@@ -50,7 +52,7 @@ const DishItemsInBucket = ({dishItem}) => {
       <Counter
         basketId={basket.basketId}
         dishId={dishItem.dishId}
-        countOfDishes={dishItem.count}
+        countOfDishes={dishCounter}
         changeCount={changePriceOfTheDish}
         changeTotalPrice={changeTotalPrice}/>
     </div>

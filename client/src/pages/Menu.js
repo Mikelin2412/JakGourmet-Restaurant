@@ -51,7 +51,7 @@ const Menu = observer(() => {
     // }
     setModalActive(false);
     navigate(-1);
-    window.location.reload();
+    // window.location.reload();
   }
 
   return (

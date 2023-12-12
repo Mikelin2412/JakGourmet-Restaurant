@@ -34,19 +34,19 @@ const Counter = ({ basketId, dishId, countOfDishes, changeCount, changeTotalPric
             <button
                 type='button'
                 className={classes.increaseButton}
-                onClick={() => increaseCount(dishCount + 1)}>+</button>
+                onClick={() => increaseCount(countOfDishes + 1)}>+</button>
             <div className={classes.counterInputBlock}>
                 <input 
                     className={classes.counterInput}
                     type='number'
                     min='1'
-                    value={dishCount}
-                    onChange={() => setDishCount(dishCount)}/>
+                    value={countOfDishes}
+                    onChange={() => setDishCount(countOfDishes)}/>
             </div>
             <button
                 type='button'
                 className={classes.decreaseButton}
-                onClick={() => decreaseCount(dishCount - 1)}>-</button>
+                onClick={() => decreaseCount(countOfDishes - 1)}>-</button>
         </div>
     )
 }
