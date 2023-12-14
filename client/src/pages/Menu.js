@@ -110,7 +110,7 @@ const Menu = observer(() => {
               <div className='dish-modal__buttons'>
                 <BucketButton
                   innerText={'Назад'}
-                  handleFunction={setModalActive} />
+                  handleFunction={() => setModalActive(false)} />
                 {
                   user.isAuth ?
                     <BucketButton
