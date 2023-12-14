@@ -32,7 +32,7 @@
 
 .add-dish-window__form__fields {
     width: 100%;
-    margin: 120px 0;
+    margin: 50px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,29 +52,30 @@
 
 .add-dish-window__form__fields__inputs {
     min-width: 75%;
-    margin: 10px;
+    margin: 30px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.add-dish-window__form__fields__inputs__description {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.add-dish-window__form__fields__inputs__description > textarea{
-    max-width: 225px;
-    max-height: 225px;
-}
-
-.add-dish-window__form__fields__inputs__description > label {
+.add-dish-window__form__fields__inputs label {
+    margin-bottom: 5px;
     color: #1D1D1D;
     font-family: Roboto;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+}
+
+.add-dish-window__form__fields__inputs__description {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-dish-window__form__fields__inputs__description > textarea{
+    width: 100%;
+    height: 225px;
+    resize: none;
 }
 
 .add-dish-window__form__fields__add-button {
@@ -92,28 +93,22 @@
     background-color: #373737;
 }
 
-.add-dish-window__form__fields__inputs__div {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.add-dish-window__form__fields__inputs__div > label {
+.add-dish-window__form__fields__inputs__type-and-image {
     color: #1D1D1D;
     font-family: Roboto;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+    display: flex;
+    gap: 15px;
 }
 
 .add-dish-window__form__fields__inputs__div > input {
-    margin-left: 10px;
     width: 100%;
     height: 25px;
 }
 
-.add-dish-window__form__fields__inputs__div > select {
-    margin-left: 10px;
+.add-dish-window__form__fields__inputs__type-and-image__type > select {
     width: 100%;
     height: 25px;
 }

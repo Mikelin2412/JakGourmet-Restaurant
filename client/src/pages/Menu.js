@@ -7,7 +7,6 @@ import Footer from '../components/Footer'
 import { Context } from '..'
 import ModalWindow from '../UI/modalWindow/ModalWindow'
 import { useNavigate } from 'react-router-dom'
-import { MENU_ROUTE } from '../utils/consts'
 import BucketButton from '../UI/bucketButton/BucketButton'
 import AdminHeader from '../components/AdminHeader'
 import AdminAddDishWindow from '../components/AdminAddDishWindow'
@@ -53,7 +52,7 @@ const Menu = observer(() => {
           <Header />
         }
         <TypesOfDishesNavigation
-          setDishId={setCurrentDishId}/>
+          setDishId={setCurrentDishId} />
         <div className='list-of-dishes'>
           {
             user.role === 'ADMIN' ?
@@ -75,6 +74,7 @@ const Menu = observer(() => {
                   <CardOfTheDish
                     key={dish.id}
                     id={id}
+                    dishId={dish.id}
                     name={dish.name}
                     price={dish.price}
                     image={dish.image}
@@ -110,14 +110,17 @@ const Menu = observer(() => {
               <div className='dish-modal__buttons'>
                 <BucketButton
                   innerText={'Назад'}
-                  handleFunction={setModalActive} />
-                <BucketButton
-                  innerText={'В корзину'}
-                  handleFunction={() => handleAddDishToTheBasket(user.user.id, dish.dishes[currentDishId].id, 1)}/>
+                  handleFunction={() => setModalActive(false)} />
+                {
+                  user.isAuth ?
+                    <BucketButton
+                      innerText={'В корзину'}
+                      handleFunction={() => handleAddDishToTheBasket(user.user.id, dish.dishes[currentDishId].id, 1)} /> : null
+                }
               </div>
             </>
             : null
-          }
+        }
       </ModalWindow>
       <AdminAddDishWindow
         active={addDishWindow}

@@ -18,3 +18,13 @@ export const userCheck = async () => {
     localStorage.setItem('token', data.token);
     return jwtDecode(data.token);
 }
+
+export const deleteAccount = async (userId) => {
+    const {data} = await $authHost.delete('api/user/deleteAccount', {
+        data: {
+            userId
+        }
+    });
+    localStorage.removeItem('token');
+    return data;
+}

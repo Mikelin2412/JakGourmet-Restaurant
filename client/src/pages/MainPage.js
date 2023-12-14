@@ -74,11 +74,11 @@ const MainPage = observer(() => {
                         <div className='our-story__info-block__description__numbers'>
                             <div className='our-story__info-block__description__numbers__item'>
                                 <h1>93</h1>
-                                <p>Напитки</p>
+                                <p>Супы</p>
                             </div>
                             <div className='our-story__info-block__description__numbers__item'>
                                 <h1>206</h1>
-                                <p>Еда</p>
+                                <p>Гарниры</p>
                             </div>
                             <div className='our-story__info-block__description__numbers__item'>
                                 <h1>71</h1>
@@ -94,11 +94,13 @@ const MainPage = observer(() => {
                 <div className='our-story__order-table'>
                     <div className='our-story__order-table__info'>
                         <h2>Отпразднуйте в одном из самых лучших ресторанов.</h2>
-                        <p>Только в этом месяце бизнес-ланч от 15 рублей</p>
+                        <p>Только в этом месяце борщ от 8 рублей</p>
                     </div>
-                    <Button
-                        value='НАШЕ МЕНЮ'
-                    />
+                    <Link to='/menu'>
+                        <Button
+                            value='НАШЕ МЕНЮ'
+                        />
+                    </Link>
                 </div>
             </section>
             <ClientsReviews/>

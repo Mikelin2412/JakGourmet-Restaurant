@@ -3,10 +3,8 @@ const TableController = require('../controller/TableController');
 const CheckRoleMiddleware = require('../middleware/CheckRoleMiddleware');
 const router = new Router();
 
-//CheckRoleMiddleware('ADMIN')
-
-router.post('/', TableController.addNewTable);
+router.post('/', CheckRoleMiddleware('ADMIN'), TableController.addNewTable);
 router.get('/', TableController.getAllTables);
-router.delete('/:id', TableController.deleteTable);
+router.delete('/:id', CheckRoleMiddleware('ADMIN'), TableController.deleteTable);
 
 module.exports = router;

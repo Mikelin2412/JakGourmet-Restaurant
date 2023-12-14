@@ -59,7 +59,7 @@ const Bucket = observer(() => {
                   innerText={'Очистить все'}/>
                 <BucketButton
                   innerText={'Бронирование'}
-                  handleFunction={setModalActive}/>
+                  handleFunction={() => setModalActive(true)}/>
               </div>
             </div>
           </div>
