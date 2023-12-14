@@ -19,3 +19,10 @@ export const getDish = async () => {
     const {data} = await $host.get('api/menu');
     return data;
 }
+
+export const deleteDish = async (id) => {
+    const {data} = await $authHost.delete('api/menu/deleteDish', {data: {
+        id
+    }});
+    return data;
+}

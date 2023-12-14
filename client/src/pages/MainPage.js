@@ -94,11 +94,13 @@ const MainPage = observer(() => {
                 <div className='our-story__order-table'>
                     <div className='our-story__order-table__info'>
                         <h2>Отпразднуйте в одном из самых лучших ресторанов.</h2>
-                        <p>Только в этом месяце борщ от 6 рублей</p>
+                        <p>Только в этом месяце борщ от 8 рублей</p>
                     </div>
-                    <Button
-                        value='НАШЕ МЕНЮ'
-                    />
+                    <Link to='/menu'>
+                        <Button
+                            value='НАШЕ МЕНЮ'
+                        />
+                    </Link>
                 </div>
             </section>
             <ClientsReviews/>

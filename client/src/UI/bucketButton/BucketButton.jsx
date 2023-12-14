@@ -19,6 +19,8 @@ const BucketButton = ({ innerText, handleFunction }) => {
       handleFunction();
     } else if (innerText === 'В корзину') {
       handleFunction();
+    } else if (innerText === 'Удалить аккаунт' || innerText === 'Редактировать') {
+      handleFunction();
     }
   }
 

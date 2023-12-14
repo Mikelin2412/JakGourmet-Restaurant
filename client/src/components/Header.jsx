@@ -5,7 +5,7 @@ import { Context } from '..';
 import { NavLink } from 'react-router-dom';
 import Button from '../UI/button/Button';
 import { observer } from 'mobx-react-lite';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE, REVIEWS_ROUTE, ORDERS_ROUTE } from '../utils/consts'
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, BUCKET_ROUTE, REVIEWS_ROUTE, ORDERS_ROUTE, USER_PROFILE } from '../utils/consts'
 
 const Header = observer(() => {
     const { user } = useContext(Context);
@@ -46,7 +46,9 @@ const Header = observer(() => {
                                 <NavLink to={REVIEWS_ROUTE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>ОТЗЫВЫ</NavLink>
                             </li>
                         </ul>
-                        <img className='navigation-menu__profile-icon' src={icon} alt='icon'></img>
+                        <NavLink to={USER_PROFILE} className={({ isActive }) => (isActive ? 'nav-links active' : 'nav-links')}>
+                            <img className='navigation-menu__profile-icon' src={icon} alt='icon'></img>
+                        </NavLink>
                         <NavLink to={MAIN_PAGE_ROUTE}>
                             <Button
                                 value="ВЫЙТИ"

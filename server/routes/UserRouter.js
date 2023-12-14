@@ -7,5 +7,7 @@ const router = new Router();
 router.post('/registration', AuthValidation, UserController.registration);
 router.post('/login', AuthValidation, UserController.login);
 router.get('/auth', AuthMiddleware, UserController.check);
+router.delete('/deleteAccount', UserController.deleteOfAccount);
+router.put('/updateProfileInfo', AuthValidation, UserController.updateProfileInfo);
 
 module.exports = router;

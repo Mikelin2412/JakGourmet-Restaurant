@@ -8,7 +8,16 @@ const User = sequelize.define('user', {
     password: {type: DataTypes.STRING, allowNull: false},
 },
 {
-    timestamps: false, // не добавлять поля createdAt и updatedAt
+    timestamps: false,
+});
+
+const UserInfo = sequelize.define('user-info', {
+    status: {type: DataTypes.STRING, allowNull: false},
+    city: {type: DataTypes.STRING, allowNull: false},
+    telephone: {type: DataTypes.STRING, allowNull: false},
+},
+{
+    timestamps: false,
 });
 
 const UserRoles = sequelize.define('user-roles', {
@@ -89,6 +98,9 @@ Dish.belongsTo(DishType);
 
 User.hasOne(Feedbacks, { foreignKey: 'id' });
 Feedbacks.belongsTo(User, { foreignKey: 'id' });
+
+User.hasOne(UserInfo, { foreignKey: 'id' });
+UserInfo.belongsTo(User, { foreignKey: 'id' });
 
 User.hasMany(Reservation);
 Reservation.belongsTo(User);

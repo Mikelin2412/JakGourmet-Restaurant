@@ -32,8 +32,22 @@ class MenuController {
         return res.json(dishes);
     }
 
-    async getDish(req, res) {
-
+    async deleteDish(req, res, next) {
+        const { id } = req.body;
+        try {
+          const dish = await Dish.findByPk(id);
+          
+          if (!dish) {
+            return next(ApiError.badRequest('Блюдо не найдено!'));
+          }
+      
+          await dish.destroy();
+      
+          return res.json({ message: 'Блюдо успешно удалено!' });
+        }
+        catch (err) {
+          return next(ApiError.internal('Произошла ошибка при удалении блюда!'));
+        }
     }
 }
 

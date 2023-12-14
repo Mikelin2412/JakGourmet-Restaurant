@@ -3,8 +3,9 @@ import Bucket from "./pages/Bucket";
 import MainPage from "./pages/MainPage";
 import Menu from "./pages/Menu";
 import Orders from "./pages/Orders";
-import { BUCKET_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, ORDERS_ROUTE, REVIEWS_ROUTE } from "./utils/consts";
+import { BUCKET_ROUTE, MAIN_PAGE_ROUTE, MENU_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, ORDERS_ROUTE, REVIEWS_ROUTE, USER_PROFILE } from "./utils/consts";
 import Reviews from "./pages/Reviews";
+import UserProfile from "./pages/UserProfile";
 
 export const authRoutes = [
     {
@@ -18,6 +19,10 @@ export const authRoutes = [
     {
         path: ORDERS_ROUTE,
         Component: Orders
+    },
+    {
+        path: USER_PROFILE,
+        Component: UserProfile
     }
 ]
 

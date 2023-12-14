@@ -65,6 +65,9 @@ const ReservationPopup = ({active, setActive}) => {
                         <option value='4'>4 столик</option>
                         <option value='5'>5 столик</option>
                         <option value='6'>6 столик</option>
+                        <option value='7'>7 столик</option>
+                        <option value='8'>8 столик</option>
+                        <option value='9'>9 столик</option>
                     </select>
                 </div>
                 <div className='modal__reservation__buttons'>
