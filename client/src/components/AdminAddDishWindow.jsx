@@ -6,7 +6,7 @@ import '../styles/AdminAddDishWindow.css'
 const AdminAddDishWindow = ({ active, setActive }) => {
   const { dish } = useContext(Context);
   const [name, setName] = useState('');
-  const [type, setType] = useState(0);
+  const [type, setType] = useState(1);
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [weight, setWeight] = useState(0);
@@ -50,11 +50,14 @@ const AdminAddDishWindow = ({ active, setActive }) => {
             <div className='add-dish-window__form__fields__inputs__type-and-image'>
               <div className='add-dish-window__form__fields__inputs__type-and-image__type'>
                 <label id='type'>Тип блюда: </label>
-                <select id='type' required={true} onChange={(e) => setType(e.target.value)}>
+                <select id='type'
+                  required={true}
+                  onChange={(e) => setType(e.target.value)}>
                   {
                     dish.types.map((type) => <option
-                      key={type.id}
-                      value={type.id}>{type.name}</option>)
+                        key={type.id}
+                        value={type.id}>{type.name}</option>
+                    )
                   }
                 </select>
               </div>
